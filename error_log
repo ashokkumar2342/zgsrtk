@@ -1,0 +1,3 @@
+[04-Aug-2017 18:15:42 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '$date' (T_VARIABLE) in /home/zadglobalschool/public_html/app/Console/Commands/OrderSms.php on line 45
+[26-Apr-2018 15:28:01 UTC] PHP Warning:  require(/home/zadglobalschool/public_html/bootstrap/../vendor/autoload.php): failed to open stream: Permission denied in /home/zadglobalschool/public_html/bootstrap/autoload.php on line 17
+[26-Apr-2018 15:28:01 UTC] PHP Fatal error:  require(): Failed opening required '/home/zadglobalschool/public_html/bootstrap/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/zadglobalschool/public_html/bootstrap/autoload.php on line 17
