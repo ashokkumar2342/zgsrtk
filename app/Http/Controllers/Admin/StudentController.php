@@ -83,8 +83,8 @@ class StudentController extends Controller
             'installment_fees'=> 'required|numeric',
             'discount' => 'required|numeric',
             'discount_name' => 'required|max:199',
-            'receipt_no' => 'required|max:199',
-            "receipt_date" => 'required|date',
+            // 'receipt_no' => 'required|max:199',
+            // "receipt_date" => 'required|date',
             "amount_payable" => 'required|numeric',
             'received_fees'=> 'required|numeric',
             "cheque_no" => 'nullable|numeric',
@@ -93,22 +93,85 @@ class StudentController extends Controller
             "cheque_date" => 'nullable|date',      
         ]);
           $studentFeesCount =StudentFee::where('student_id',$request->student_id)->where('session_id',$request->session_id)->get();
+          $payment_type =$request->payment_type;
          $monthNames='';
         if (count($studentFeesCount)==0){
             if ($request->student_payment_type==1) {
                $monthNames='All';  
-            }else{
-                 $monthNames='Apr,May,Jun';
+            }elseif ($request->student_payment_type==3){
+                  $monthNames='Apr';
+            }
+            else{
+                 $monthNames='Apr - Jun';
             }
            
         }
          elseif (count($studentFeesCount)==1) {
-             $monthNames='Jul,Aug,Sep';    
+            if ($payment_type==2){
+              $monthNames='Jul - Sep';                  
+            }
+            elseif ($payment_type==3){
+              $monthNames='May';
+            }
+                
          }elseif (count($studentFeesCount)==2) {
-             $monthNames='Oct,Nov,Dec';    
+            if ($payment_type==2){
+               $monthNames='Oct - Dec';                    
+            }
+            elseif ($payment_type==3){
+              $monthNames='Jun';
+            }
+              
          }elseif (count($studentFeesCount)==3) {
-             $monthNames='Jan,Feb,Mar';    
+            if ($payment_type==2){
+                  $monthNames='Jan - Mar';                     
+            }
+            elseif ($payment_type==3){
+              $monthNames='July';
+            }
+          
+         }elseif (count($studentFeesCount)==4) { 
+            if ($payment_type==3){
+              $monthNames='Aug';
+            }
+          
+         }elseif (count($studentFeesCount)==5) { 
+            if ($payment_type==3){
+              $monthNames='Sep';
+            }
+          
+         }elseif (count($studentFeesCount)==6) { 
+            if ($payment_type==3){
+              $monthNames='Oct';
+            }
+          
+         }elseif (count($studentFeesCount)==7) { 
+            if ($payment_type==3){
+              $monthNames='Nuv';
+            }
+          
+         }elseif (count($studentFeesCount)==8) { 
+            if ($payment_type==3){
+              $monthNames='Dec';
+            }
+          
+         }elseif (count($studentFeesCount)==9) { 
+            if ($payment_type==3){
+              $monthNames='Jan';
+            }
+          
+         }elseif (count($studentFeesCount)==10) { 
+            if ($payment_type==3){
+              $monthNames='Feb';
+            }
+          
+         }elseif (count($studentFeesCount)==11) { 
+            if ($payment_type==3){
+              $monthNames='Mar';
+            }
+          
          }
+        $receipt_no =StudentFee::orderBy('id','DESC')->first()->id + 1;
         $studentFee = new StudentFee();
         $studentFee->student_id = $request->student_id;
         $studentFee->session_id = $request->session_id;
@@ -117,8 +180,8 @@ class StudentController extends Controller
         $studentFee->discount_type_id = $request->discount_type_id;
         $studentFee->discount_name = $request->discount_name;
         $studentFee->discount = $request->discount;
-        $studentFee->receipt_no = $request->receipt_no;
-        $studentFee->receipt_date = $request->receipt_date;
+        $studentFee->receipt_no = $receipt_no;
+        $studentFee->receipt_date = date('Y-m-d');
         $studentFee->amount_payable = $request->amount_payable;
         $studentFee->cheque_no = $request->cheque_no;
         $studentFee->bank_name = $request->bank_name;
@@ -248,6 +311,8 @@ class StudentController extends Controller
         $student->sms_charge =$request->sms_charges;
         $student->tution_fee = $request->tution_fees;
         $student->transport_fee= $transport_fee;
+        $student->meal_pay_time= $request->meal_pay_time;
+        $student->tution_pay_time= $request->tution_pay_time;
         
         $student->date_of_admission= date('Y-m-d',strtotime($request->date_of_admission));
         $student->name= $request->student_name;
@@ -394,6 +459,8 @@ class StudentController extends Controller
         $student->sms_charge =$request->sms_charges;
         $student->tution_fee = $request->tution_fees;
         $student->transport_fee= $transport_fee;
+        $student->meal_pay_time= $request->meal_pay_time;
+        $student->tution_pay_time= $request->tution_pay_time;
         
         
         $student->name= $request->student_name;

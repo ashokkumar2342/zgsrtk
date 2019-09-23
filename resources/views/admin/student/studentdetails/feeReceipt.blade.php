@@ -26,7 +26,41 @@
     @php  
      
     $firstPaymentId =App\StudentFee::where('student_id',$studentFee->student_id)->where('session_id',$studentFee->session_id)->first()->id; 
+    $studentDetail =App\Student::find($studentFee->student_id); 
+     $csn ='';
+    if ($studentFee->student->centers->id==1){
+        $csn ='HU/';
+    }
+    else if($studentFee->student->centers->id==2){
+        $csn ='SR/';
+    }
+    else{
+         $csn ='OM/';
+    }
+    $payTypeMeal = '';
+    $payTypeTution = '';
+    if ($studentDetail->meal_pay_time==1){
+        $payTypeMeal='Annual';
+    }elseif ($studentDetail->meal_pay_time==2) {
+        $payTypeMeal='Quarterly';
+    }elseif ($studentDetail->meal_pay_time==3) {
+        $payTypeMeal='Monthly';
+    } 
+    if ($studentDetail->tution_pay_time==1){
+        $payTypeTution='Annual';
+    }elseif ($studentDetail->tution_pay_time==2) {
+        $payTypeTution='Quarterly';
+    }elseif ($studentDetail->tution_pay_time==3) {
+        $payTypeTution='Monthly';
+    } 
+    if($studentDetail->tution_pay_time==null){
+         $payTypeTution='Quarterly';
+    }
+    if($studentDetail->meal_pay_time==null){
+         $payTypeMeal='Annual';
+    }
      @endphp
+    
     <div id="p1" style="font-family:Arial;">    
         <center>
             <table>
@@ -48,7 +82,7 @@
                                         <span id="lblRegistraionFees0" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Receipt No : </span>
                                     </td>
                                     <td class="style4">
-                                        <span id="lblReceiptNo" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{ $studentFee->receipt_no }}</span>
+                                        <span id="lblReceiptNo" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{ $csn }}{{ $studentFee->receipt_no }}</span>
                                     </td>
                                     <td align="left" style="font-weight: bold; font-size: small;">
                                         <span id="lblRegistraionFees4" style="font-family:Arial;font-size:Small;text-align: left;">Date :</span>
@@ -68,7 +102,7 @@
                                         <span id="lblRegistraionFees5" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Class : </span>
                                     </td>
                                     <td>
-                                        <span id="lblClass" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{$studentFee->student->classes->alias}}</span>
+                                        <span id="lblClass" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{$studentFee->student->classes->alias}}<sup>{{$studentFee->student->classes->su or ''}}</sup></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -160,7 +194,8 @@
                                 @endif
                                 <tr>
                                     <td align="left" style="font-weight: bold; font-size: small;">
-                                        Tuition Fee (Annual/Quarterly)
+                                        
+                                        Tuition Fee ({{ $payTypeTution }})
                                     </td>
                                     <td align="right" style="font-size: small;">
                                         <span id="lblTutionFees" style="font-family:Arial;font-size:Small;">{{$studentFee->tution_fee}}</span>
@@ -202,7 +237,7 @@
                                 </tr>
                                  <tr>
                                     <td align="left" style="font-weight: bold; font-size: small;">
-                                        <span id="lblCaution" style="display:inline-block;font-family:Arial;font-size:Small;width:220px;text-align: left;">Meal (Annual/Quarterly)</span>
+                                        <span id="lblCaution" style="display:inline-block;font-family:Arial;font-size:Small;width:220px;text-align: left;">Meal ({{ $payTypeMeal }})</span>
                                     </td>
                                     <td align="right" style="font-size: small;">
                                         <span id="lblCautionMoney" style="font-family:Arial;font-size:Small;">{{$studentFee->caution_money}}</span>
@@ -263,14 +298,17 @@
                                         <span id="lblSiblingStaff" style="font-family:Arial;font-size:Small;"></span>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td align="Right" style="font-weight: bold; font-size: small;">
-                                        <span id="lblSSDiscount2" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;">Sibling/School Staff/Others Discount (-)</span>
-                                    </td>
-                                    <td align="right">
-                                        <span id="lblOtherDiscount" style="font-family:Arial;font-size:Small;">{{$studentFee->discount}}</span>
-                                    </td>
-                                </tr>
+                                @if ($studentFee->discountType->id!=1)
+                                  <tr>
+                                      <td align="Right" style="font-weight: bold; font-size: small;">
+                                          <span id="lblSSDiscount2" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;"> {{ $studentFee->discountType->name or '' }} Discount (-)</span>
+                                      </td>
+                                      <td align="right">
+                                          <span id="lblOtherDiscount" style="font-family:Arial;font-size:Small;">{{$studentFee->discount}}</span>
+                                      </td>
+                                  </tr>   
+                                @endif
+                              
                                 <tr>
                                     <td align="Right" style="font-weight: bold; font-size: small;">
                                         <span id="lblLessLbl" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Current Balance </span>
@@ -307,10 +345,12 @@
                                         <span id="lblChequeNo" style="font-size: small;">{{($studentFee->cheque_no)?$studentFee->cheque_no:'_______'}}</span>
                                         &nbsp;<span id="Label3" style="font-weight: bold;
                                             font-size: small;">Date:</span>
-                                        <span id="lblChequeDate" style="font-size: small;">{{($studentFee->bank_name)?$studentFee->bank_name:'__/__/____'}}</span>
+                                        <span id="lblbankName" style="font-size: small;">{{($studentFee->cheque_date)?$studentFee->cheque_date:'________'}}</span>
+                                        
                                         &nbsp;<span id="Label4" style="font-weight: bold;
                                             font-size: small;">Bank Name: </span>
-                                        <span id="lblbankName" style="font-size: small;">{{($studentFee->cheque_date)?$studentFee->cheque_date:'________'}}</span>
+                                             <span id="lblChequeDate" style="font-size: small;">{{($studentFee->bank_name)?$studentFee->bank_name:'__/__/____'}}</span>
+                                        
                                     </td>
                                 </tr>
                                 <tr>
@@ -351,7 +391,7 @@
                                         <span id="lblRegistraionFees0" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Receipt No : </span>
                                     </td>
                                     <td class="style4">
-                                        <span id="lblReceiptNo" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{ $studentFee->receipt_no }}</span>
+                                        <span id="lblReceiptNo" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{ $csn }}{{ $studentFee->receipt_no }}</span>
                                     </td>
                                     <td align="left" style="font-weight: bold; font-size: small;">
                                         <span id="lblRegistraionFees4" style="font-family:Arial;font-size:Small;text-align: left;">Date :</span>
@@ -371,7 +411,7 @@
                                         <span id="lblRegistraionFees5" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Class : </span>
                                     </td>
                                     <td>
-                                        <span id="lblClass" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{$studentFee->student->classes->alias}}</span>
+                                        <span id="lblClass" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{$studentFee->student->classes->alias}}<sup>{{$studentFee->student->classes->su or ''}}</sup></span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -463,7 +503,7 @@
                                 @endif
                                 <tr>
                                     <td align="left" style="font-weight: bold; font-size: small;">
-                                        Tuition Fee (Annual/Quarterly)
+                                        Tuition Fee ({{ $payTypeTution }})
                                     </td>
                                     <td align="right" style="font-size: small;">
                                         <span id="lblTutionFees" style="font-family:Arial;font-size:Small;">{{$studentFee->tution_fee}}</span>
@@ -504,7 +544,7 @@
                                 </tr>
                                 <tr>
                                     <td align="left" style="font-weight: bold; font-size: small;">
-                                        <span id="lblCaution" style="display:inline-block;font-family:Arial;font-size:Small;width:220px;text-align: left;">Meal (Annual/Quarterly)</span>
+                                        <span id="lblCaution" style="display:inline-block;font-family:Arial;font-size:Small;width:220px;text-align: left;">Meal ({{ $payTypeMeal }})</span>
                                     </td>
                                     <td align="right" style="font-size: small;">
                                         <span id="lblCautionMoney" style="font-family:Arial;font-size:Small;">{{$studentFee->caution_money}}</span>
@@ -565,14 +605,16 @@
                                         <span id="lblSiblingStaff" style="font-family:Arial;font-size:Small;"></span>
                                     </td>
                                 </tr>
+                              @if ($studentFee->discountType->id!=1)
                                 <tr>
                                     <td align="Right" style="font-weight: bold; font-size: small;">
-                                        <span id="lblSSDiscount2" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;">Sibling/School Staff/Others Discount (-)</span>
+                                        <span id="lblSSDiscount2" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;"> {{ $studentFee->discountType->name or '' }} Discount (-)</span>
                                     </td>
                                     <td align="right">
                                         <span id="lblOtherDiscount" style="font-family:Arial;font-size:Small;">{{$studentFee->discount}}</span>
                                     </td>
-                                </tr>
+                                </tr>   
+                              @endif
                                  <tr>
                                     <td align="Right" style="font-weight: bold; font-size: small;">
                                         <span id="lblLessLbl" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Current Balance </span>
@@ -609,10 +651,11 @@
                                         <span id="lblChequeNo" style="font-size: small;">{{($studentFee->cheque_no)?$studentFee->cheque_no:'_______'}}</span>
                                         &nbsp;<span id="Label3" style="font-weight: bold;
                                             font-size: small;">Date:</span>
-                                        <span id="lblChequeDate" style="font-size: small;">{{($studentFee->bank_name)?$studentFee->bank_name:'__/__/____'}}</span>
-                                        &nbsp;<span id="Label4" style="font-weight: bold;
-                                            font-size: small;">Bank Name: </span>
-                                        <span id="lblbankName" style="font-size: small;">{{($studentFee->cheque_date)?$studentFee->cheque_date:'________'}}</span>
+                                     <span id="lblbankName" style="font-size: small;">{{($studentFee->cheque_date)?$studentFee->cheque_date:'________'}}</span>
+                                     
+                                     &nbsp;<span id="Label4" style="font-weight: bold;
+                                         font-size: small;">Bank Name: </span>
+                                          <span id="lblChequeDate" style="font-size: small;">{{($studentFee->bank_name)?$studentFee->bank_name:'__/__/____'}}</span>
                                     </td>
                                 </tr>
                                 <tr>

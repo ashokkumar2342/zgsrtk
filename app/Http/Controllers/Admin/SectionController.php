@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Section;
-use App\ClassType;
 use App\ClassFee;
+use App\ClassType;
+use App\Http\Controllers\Controller;
+use App\PaymentType;
+use App\Section;
 use App\SessionDate;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class SectionController extends Controller
 {
@@ -33,7 +34,7 @@ class SectionController extends Controller
     {
         // return $request;
         $classFee = ClassFee::where(['center_id'=>$request->center_id,'class_id'=>$request->id,'session_id'=>$request->session])->first();
-
+        $paymenttypes = PaymentType::get();
         // $classFee = ClassFee::where(['center_id'=>$request->id,'class_id'=>$request->id,'session_id'=>$request->session])->first();
          
         $input = '  <div class="row fee-field">
@@ -68,10 +69,21 @@ class SectionController extends Controller
                      </div>
                      <hr>
                      <div class="row">
-                     <div class="col-lg-3">                         
+                     <div class="col-lg-2">                         
                        <div class="form-group">
                         <label for="caution_money" class=" control-label">Meal (In Rs.)</label>
                         <input class="form-control required classfee"  value="'.$classFee->caution_fee.'" name="caution_money" type="number" id="caution_money">
+                        <p class="text-danger"></p>
+                        </div>
+                     </div>
+                     <div class="col-lg-1">                         
+                       <div class="form-group">
+                        <label for="pay_type" class=" control-label">Type</label>
+                         <select name="meal_pay_time" class="form-control">
+                            <option value="1">Yearly</option>
+                            <option value="4">Quarterly</option>
+                             <option value="12">Monthly</option>
+                         </select>
                         <p class="text-danger"></p>
                         </div>
                      </div>
@@ -90,10 +102,21 @@ class SectionController extends Controller
                         <p class="text-danger"></p>
                         </div>
                      </div>
-                     <div class="col-lg-3">                         
+                     <div class="col-lg-2">                         
                        <div class="form-group">
                         <label for="tution_fees" class=" control-label">Tuition Fees (In Rs.)</label>
                         <input class="form-control required classfee"  value="'.($classFee->tution_fee*4).'" name="tution_fees" type="number" id="tution_fees">
+                        <p class="text-danger"></p>
+                        </div>
+                     </div>
+                     <div class="col-lg-1">                         
+                       <div class="form-group">
+                        <label for="tution_pay_time" class=" control-label">Type</label>
+                         <select name="tution_pay_time" class="form-control">
+                            <option value="1">Yearly</option>
+                            <option value="4" selected>Quarterly</option>
+                             <option value="12">Monthly</option>
+                         </select>
                         <p class="text-danger"></p>
                         </div>
                      </div>

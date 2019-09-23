@@ -8,7 +8,7 @@
 <div class="row">
    <div class="col-lg-2" style="background-color: #000;
     padding: 5px;
-    padding-left: 90px;
+    padding-left: 50px;
     font-size: 20px;">
         <span style="padding:5px auto;color:#fff">
          <b> Latest News</b> <i class="fa fa-space-shuttle faa-passing animated"></i> </span>  

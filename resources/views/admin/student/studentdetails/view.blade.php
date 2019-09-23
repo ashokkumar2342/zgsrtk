@@ -179,6 +179,7 @@
       <div class="row">
       
              {!! Form::hidden('student_id', $student->id, []) !!}
+             {!! Form::hidden('payment_type', $student->payment_type_id, []) !!}
              {!! Form::hidden('student_payment_type', $student->paymentType->times, []) !!}
              @if(count($studentFees) < 1)
              
@@ -192,17 +193,33 @@
              {!! Form::hidden('activity_charges', ($student->activity_charge/$student->paymentType->times), []) !!}
              {!! Form::hidden('smart_class_fees', ($student->smart_class_fee/$student->paymentType->times), []) !!}
              {!! Form::hidden('sms_charges', ($student->sms_charge/$student->paymentType->times), []) !!}
-             {!! Form::hidden('tution_fees', ($student->tution_fee/$student->paymentType->times), []) !!}
-             {!! Form::hidden('caution_money', ($student->caution_money/$student->paymentType->times), []) !!}
-             {!! Form::hidden('transport_fee', ($student->transport_fee/$student->paymentType->times), []) !!}
-             
+               @if ($student->tution_pay_time==null)
+               {!! Form::hidden('tution_fees', ($student->tution_fee/$student->paymentType->times), []) !!}
+                @else
+                {!! Form::hidden('tution_fees', ($student->tution_fee/$student->tution_pay_time), []) !!}
+               @endif
+               @if ($student->meal_pay_time==null)
+               {!! Form::hidden('caution_money', ($student->caution_money/$student->paymentType->times), []) !!}
+                @else
+                 {!! Form::hidden('caution_money', ($student->caution_money/$student->meal_pay_time), []) !!}
+               @endif
+              {!! Form::hidden('transport_fee', ($student->transport_fee/$student->paymentType->times), []) !!} 
             @else
             {!! Form::hidden('session_id', $student->session_id, []) !!}
              {!! Form::hidden('activity_charges', ($student->activity_charge/$student->paymentType->times), []) !!}
              {!! Form::hidden('smart_class_fees', ($student->smart_class_fee/$student->paymentType->times), []) !!}
              {!! Form::hidden('sms_charges', ($student->sms_charge/$student->paymentType->times), []) !!}
-             {!! Form::hidden('caution_money', ($student->caution_money/$student->paymentType->times), []) !!}
-             {!! Form::hidden('tution_fees', ($student->tution_fee/$student->paymentType->times), []) !!}
+              @if ($student->tution_pay_time==null)
+              {!! Form::hidden('tution_fees', ($student->tution_fee/$student->paymentType->times), []) !!}
+               @else
+               {!! Form::hidden('tution_fees', ($student->tution_fee/$student->tution_pay_time), []) !!}
+              @endif
+              @if ($student->meal_pay_time==null)
+              {!! Form::hidden('caution_money', ($student->caution_money/$student->paymentType->times), []) !!}
+               @else
+                {!! Form::hidden('caution_money', ($student->caution_money/$student->meal_pay_time), []) !!}
+              @endif
+             {!! Form::hidden('transport_fee', ($student->transport_fee/$student->paymentType->times), []) !!} 
              {!! Form::hidden('transport_fee', ($student->transport_fee/$student->paymentType->times), []) !!}
             @endif
       <div class="row">{{--row start --}}
@@ -292,28 +309,7 @@
               </div>
           </div>
       </div>{{--row end --}}   
-       <div class="row">{{--row start --}}
-          <div class="col-md-12 ">
-              <div class="form-group">
-                  <div class="col-md-12">
-                       <div class="col-lg-6 ">                         
-                          <div class="form-group">
-                              {{ Form::label('receipt_no','Receipt No *',['class'=>' control-label']) }}                         
-                              {{ Form::text('receipt_no','',['class'=>'form-control required','autocomplete'=>'off']) }}
-                              <p class="text-danger">{{ $errors->first('receipt_no') }}</p>
-                          </div>
-                      </div>
-                       <div class="col-lg-6">                         
-                          <div class="form-group">
-                              {{ Form::label('receipt_date','Receipt Date',['class'=>' control-label']) }}                         
-                              {{ Form::text('receipt_date','',['class'=>'form-control datepicker','required','autocomplete'=>'off']) }}
-                              <p class="text-danger">{{ $errors->first('receipt_date') }}</p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>{{--row end --}} 
+     
      
       <div class="row">{{--row start --}}
           <div class="col-md-12 ">

@@ -140,10 +140,21 @@
                      <hr>
                      <div class="row">
 
-                      <div class="col-lg-3">                         
+                      <div class="col-lg-2">                         
                        <div class="form-group">
                         <label for="caution_money" class=" control-label">Meal (In Rs.)</label>
                         <input class="form-control required classfee"  value="{{ $student->caution_money }}" name="caution_money" type="number" id="caution_money">
+                        <p class="text-danger"></p>
+                        </div>
+                     </div>
+                     <div class="col-lg-1">                         
+                       <div class="form-group">
+                        <label for="pay_type" class=" control-label">Type</label>
+                         <select name="meal_pay_time" class="form-control">
+                            <option value="1" {{ $student->meal_pay_time==1?'selected':'' }}>Yearly</option>
+                            <option value="4" {{ $student->meal_pay_time==4?'selected':'' }}>Quarterly</option>
+                             <option value="12" {{ $student->meal_pay_time==12?'selected':'' }}>Monthly</option>
+                         </select>
                         <p class="text-danger"></p>
                         </div>
                      </div>
@@ -162,10 +173,21 @@
                         <p class="text-danger"></p>
                         </div>
                      </div>
-                     <div class="col-lg-3">                         
+                     <div class="col-lg-2">                         
                        <div class="form-group">
                         <label for="tution_fees" class=" control-label">Tuition Fees (In Rs.)</label>
                         <input class="form-control required classfee"  value="{{ $student->tution_fee }}" name="tution_fees" type="number" id="tution_fees">
+                        <p class="text-danger"></p>
+                        </div>
+                     </div>
+                     <div class="col-lg-1">                         
+                       <div class="form-group">
+                        <label for="tution_pay_time" class=" control-label">Type</label>
+                         <select name="tution_pay_time" class="form-control">
+                           <option value="1" {{ $student->tution_pay_time==1?'selected':'' }}>Yearly</option>
+                           <option value="4" {{ $student->tution_pay_time==4?'selected':'' }}>Quarterly</option>
+                            <option value="12" {{ $student->tution_pay_time==12?'selected':'' }}>Monthly</option>
+                         </select>
                         <p class="text-danger"></p>
                         </div>
                      </div>
