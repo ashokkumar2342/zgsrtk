@@ -21,7 +21,7 @@ return [
 
         // Should be route address for url() function
         'redirectUrl' => env('INDIPAY_REDIRECT_URL', 'fee/online/response'),
-        'cancelUrl' => env('INDIPAY_CANCEL_URL', 'indipay/response'),
+        'cancelUrl' => env('INDIPAY_CANCEL_URL', 'fee/online/response'),
 
         'currency' => env('INDIPAY_CURRENCY', 'INR'),
         'language' => env('INDIPAY_LANGUAGE', 'EN'),
