@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Student;
-use App\StudentFee;
+use App\Center;
 use App\ClassType;
+use App\DiscountType;
+use App\Http\Controllers\Controller;
 use App\PaymentType;
 use App\SessionDate;
-use App\DiscountType;
+use App\Student;
+use App\StudentFee;
 use App\TransportRoute;
-use App\Center;
-use Storage;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Excel;
-use DB;
 use Carbon;
+use DB;
+use Excel;
+use Illuminate\Http\Request;
+use Softon\Indipay\Facades\Indipay;
+use Storage;
 
 class StudentController extends Controller
 {
@@ -692,6 +693,35 @@ class StudentController extends Controller
             }
             return redirect()->back()->with(['class'=>'success','message'=>'Student Fee Update Successfully']);
     }
+
+    public function onlinePay(Request $request)
+    {
+         $parameters = [
+              
+                'tid' => '1233221223322',
+                
+                'order_id' => '1232212',
+                
+                'amount' => '1200.00',
+                
+              ];
+              
+              $order = Indipay::prepare($parameters);
+              return Indipay::process($order);
+    }
+
+    public function response(Request $request)
+       
+       {
+           // For default Gateway
+           $response = Indipay::response($request);
+           
+           // For Otherthan Default Gateway
+           $response = Indipay::gateway('NameOfGatewayUsedDuringRequest')->response($request);
+
+           dd($response);
+       
+       }  
 
 
    
