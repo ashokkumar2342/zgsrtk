@@ -31,7 +31,7 @@ class StudentAttendanceController extends Controller
     public function search(Request $request)
     {
         $students = Student::where(['center_id'=>$request->center,'session_id'=>$request->session,'class_id'=>$request->class,'section_id'=>$request->section])->get(['id','name','father_name','mother_name','class_id','section_id','session_id']); 
-
+        $options =array();
         foreach ($students as $student) {
             $row = '<tr>
             <td>'.$student->id.'</td>
