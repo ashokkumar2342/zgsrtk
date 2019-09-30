@@ -29,7 +29,7 @@ class StudentAttendanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function search(Request $request)
-    { dd('dd');
+    {
         $students = Student::where(['center_id'=>$request->center,'session_id'=>$request->session,'class_id'=>$request->class,'section_id'=>$request->section])->get(['id','name','father_name','mother_name','class_id','section_id','session_id']); 
 
         foreach ($students as $student) {
