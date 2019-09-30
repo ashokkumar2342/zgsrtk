@@ -698,7 +698,7 @@ class StudentController extends Controller
     {
          $parameters = [
               
-                'tid' => '1233221223322',
+                'tid' => '124',
                 
                 'order_id' => '1232212',
                 
@@ -712,12 +712,10 @@ class StudentController extends Controller
 
     public function response(Request $request)
        
-       {
+       {  
            // For default Gateway
            $response = Indipay::response($request);
-           
-           // For Otherthan Default Gateway
-           $response = Indipay::gateway('NameOfGatewayUsedDuringRequest')->response($request);
+            
 
            dd($response);
        

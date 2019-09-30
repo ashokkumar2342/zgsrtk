@@ -33,8 +33,7 @@ Route::group(['middleware' => 'admin'], function() {
         Route::group(['prefix' => 'fee'], function() {
             Route::post('pay', 'StudentController@payFee')->name('admin.student.fee.paid');
             Route::get('online-pay', 'StudentController@onlinePay')->name('admin.student.fee.online.pay');
-            Route::get('online/response', 'StudentController@response')->name('admin.student.fee.online.response');
-            Route::get('online-pay', 'StudentController@onlinePay')->name('admin.student.fee.online.pay');
+            
             Route::get('{studentFee}/edit', 'StudentController@studentFeeEdit')->name('admin.student.fee.edit');
             Route::get('{studentFee}/delete', 'StudentController@studentFeeDelete')->name('admin.student.fee.delete');
             Route::post('{studentFee}/update', 'StudentController@studentFeeUpdate')->name('admin.student.fee.update');

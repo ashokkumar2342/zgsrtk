@@ -20,8 +20,8 @@ return [
         'workingKey' => env('INDIPAY_WORKING_KEY', ''),
 
         // Should be route address for url() function
-        'redirectUrl' => env('INDIPAY_REDIRECT_URL', 'fee/online/response'),
-        'cancelUrl' => env('INDIPAY_CANCEL_URL', 'fee/online/response'),
+        'redirectUrl' => env('INDIPAY_REDIRECT_URL', 'api/online/response'),
+        'cancelUrl' => env('INDIPAY_CANCEL_URL', 'api/online/response'),
 
         'currency' => env('INDIPAY_CURRENCY', 'INR'),
         'language' => env('INDIPAY_LANGUAGE', 'EN'),
