@@ -72,7 +72,7 @@
                                     <td colspan="4">
                                         <div style="width: 450px;" align="center">
                                             <img src="{{asset('images/logo.png')}}" alt="" height="50px" /><br />
-                                            <span id="lblheader" style="font-family:Arial;font-size:Small;">ZAD Eduplex, HUDA Complex, Tele : +91-8397068001</br>8th km., Jind Road, N.H. 71, Tele : +91-8570006662<br/>OMAXE CIty, Delhi Road Rohtak -124001(Hr.)-+91-8295300441</br>Fee Receipt (Office Copy) Session : {{$studentFee->student->sessions->date}}</span>
+                                            <span id="lblheader" style="font-family:Arial;font-size:Small;">ZAD Eduplex, HUDA Complex, Tele : +91-8397068001</br>8th km., Jind Road, N.H. 71, Tele : +91-8570006662<br/>OMAXE City, Delhi Road Rohtak -124001(Hr.)-+91-8295300441</br>Fee Receipt (Office Copy) Session : {{$studentFee->student->sessions->date}}</span>
                                             <hr />
                                         </div>
                                     </td>
@@ -88,7 +88,7 @@
                                         <span id="lblRegistraionFees4" style="font-family:Arial;font-size:Small;text-align: left;">Date :</span>
                                     </td>
                                     <td>
-                                        <span id="lblReceiptDate" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{$studentFee->receipt_date}}</span>
+                                        <span id="lblReceiptDate" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{date('d-m-Y',strtotime($studentFee->receipt_date))}}</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -381,7 +381,7 @@
                                     <td colspan="4">
                                         <div style="width: 450px;" align="center">
                                             <img src="{{asset('images/logo.png')}}" alt="" height="50px" /><br />
-                                            <span id="lblheader" style="font-family:Arial;font-size:Small;">ZAD Eduplex, HUDA Complex, Tele : +91-8397068001</br>8th km., Jind Road, N.H. 71, Tele : +91-8570006662<br/>OMAXE CIty, Delhi Road Rohtak -124001(Hr.)-+91-8295300441</br>Fee Receipt (Parents Copy) Session : {{$studentFee->student->sessions->date}}</span>
+                                            <span id="lblheader" style="font-family:Arial;font-size:Small;">ZAD Eduplex, HUDA Complex, Tele : +91-8397068001</br>8th km., Jind Road, N.H. 71, Tele : +91-8570006662<br/>OMAXE City, Delhi Road Rohtak -124001(Hr.)-+91-8295300441</br>Fee Receipt (Parents Copy) Session : {{$studentFee->student->sessions->date}}</span>
                                             <hr />
                                         </div>
                                     </td>
@@ -397,7 +397,7 @@
                                         <span id="lblRegistraionFees4" style="font-family:Arial;font-size:Small;text-align: left;">Date :</span>
                                     </td>
                                     <td>
-                                        <span id="lblReceiptDate" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{$studentFee->receipt_date}}</span>
+                                        <span id="lblReceiptDate" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{date('d-m-Y',strtotime($studentFee->receipt_date))}}</span>
                                     </td>
                                 </tr>
                                 <tr>
