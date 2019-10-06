@@ -6,6 +6,7 @@ use App\Center;
 use App\ClassType;
 use App\DiscountType;
 use App\Http\Controllers\Controller;
+use App\OnlinePaymentHistory;
 use App\PaymentMode;
 use App\PaymentType;
 use App\SessionDate;
@@ -754,5 +755,34 @@ class StudentController extends Controller
            return $response;
 
      }    
+
+     public function onlinePayFeeReport(Request $request)       
+     {            
+        $centers = Center::where('status',1)->get();
+        $paymenttypes = array_pluck(PaymentType::get(['id','name'])->toArray(),'name', 'id');
+        $classes = array_pluck(ClassType::get(['id','alias'])->toArray(),'alias', 'id');
+        $discounts = array_pluck(DiscountType::get(['id','name'])->toArray(),'name', 'id');
+        $paymentmodes = array_pluck(PaymentMode::get(['id','name'])->toArray(),'name', 'id');
+        $sessions = array_pluck(SessionDate::orderBy('id','desc')->get(['id','date'])->toArray(),'date', 'id');
+        $routes = array_pluck(TransportRoute::get(['id','name'])->toArray(),'name', 'id');
+        return view('admin.student.report.online_pay_fee_form',compact('classes','routes','sessions','centers','paymenttypes','discounts','paymentmodes'));
+      }     
+      public function onlinePayFeeReportShow(Request $request)       
+      {    
+        if ($request->tracking!=null) {
+           $OnlinePaymentHistorys =OnlinePaymentHistory::where('tracking_id', $request->tracking)->get();    
+        }else{
+             $OnlinePaymentHistorys =OnlinePaymentHistory::where('created_at', '>=', $request->from_date)->where('created_at', '<=', $request->to_date) 
+                             ->get();
+        }
+          
+        $response = array(); 
+        $response['data']= view('admin.student.report.online_pay_fee_result',compact('OnlinePaymentHistorys'))->render();
+            $response['status'] = 1;
+            return $response;
+
+      }  
+
+
    
 }

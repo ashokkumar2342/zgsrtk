@@ -113,6 +113,7 @@
                             <li><a href="{{ route('admin.transfer.form') }}"><i class="fa fa-circle-o"></i> Transfer Centre</a></li>
                             <li><a href="{{ route('admin.student.class.fees.form') }}"><i class="fa fa-circle-o"></i>Class Fee Update</a></li>
                             <li><a href="{{ route('admin.student.fee.report') }}"><i class="fa fa-circle-o"></i>Fee Report</a></li>
+                            <li><a href="{{ route('admin.student.online.pay.fee.report') }}"><i class="fa fa-circle-o"></i>Online Payment Fee Report</a></li>
 
                         </ul>
                     </li>
