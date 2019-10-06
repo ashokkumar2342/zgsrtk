@@ -55,10 +55,10 @@
                                                     
                                                 </div>
                                             </div>
-                                             <div class="col-lg-2">                         
+                                             {{-- <div class="col-lg-2">                         
                                                 <div class="form-group">
                                                     {{ Form::label('class','Class',['class'=>' control-label']) }}
-                                                    {!! Form::select('class',[], '', ['class'=>'form-control','placeholder'=>'Select Class','required']) !!}
+                                                    {!! Form::select('class',[], '', ['class'=>'form-control','placeholder'=>'Select Class']) !!}
                                                    
                                                 </div>
                                             </div>
@@ -66,26 +66,42 @@
                                                 <div class="form-group">
                                                     {{ Form::label('section','Section',['class'=>' control-label']) }}
                                                     {!! Form::select('section',[]
-                                                    , '', ['class'=>'form-control','placeholder'=>'Select Section','required']) !!}
+                                                    , '', ['class'=>'form-control','placeholder'=>'Select Section']) !!}
                                                     <p class="text-danger">{{ $errors->first('section') }}</p>
                                                 </div>
-                                            </div>
+                                            </div> --}}
+                                      {{--       <div class="col-lg-2">                         
+                                                <div class="form-group">
+                                                    {{ Form::label('payment_mode','Payment Mode',['class'=>' control-label']) }}   
+                                                    {!! Form::select('payment_mode',$paymentmodes, '', ['class'=>'form-control','placeholder'=>'choose payment mode']) !!}
+                                                    </div>
+                                                   
+                                                </div> --}}
                                             <div class="col-lg-2">                         
                                                 <div class="form-group">
                                                     {{ Form::label('from_date','From Date',['class'=>' control-label']) }}   
                                                                               
-                                                    {{ Form::date('from_date','',array('class' => 'form-control','data-inputmask'=>"'alias': 'dd/mm/yyyy'", 'id="datepicker"', 'required' )) }}
+                                                    {{ Form::date('from_date','',array('class' => 'form-control','data-inputmask'=>"'alias': 'dd/mm/yyyy'", 'id="datepicker"','required' )) }}
                                                     </div>
                                                   
                                                 </div>
+
                                                 <div class="col-lg-2">                         
                                                     <div class="form-group">
                                                         {{ Form::label('to_date','To Date',['class'=>' control-label']) }}   
                                                                                   
-                                                        {{ Form::date('to_date','',array('class' => 'form-control','data-inputmask'=>"'alias': 'dd/mm/yyyy'", 'id="datepicker"', 'required' )) }}
+                                                        {{ Form::date('to_date','',array('class' => 'form-control','data-inputmask'=>"'alias': 'dd/mm/yyyy'", 'id="datepicker"','required' )) }}
                                                         </div>
                                                        
                                                     </div>
+                                                  <div class="col-lg-2">                         
+                                                    <div class="form-group">
+                                                       <br>                       
+                                                        <input type="submit" value="Show" class="btn btn-success">
+                                                        </div>
+                                                       
+                                                    </div>
+                                                    
                                                 
                                             </div>  
 
@@ -95,11 +111,11 @@
                                     </div>
                                 </div>
                             </div><hr>
-                            <div class="row">                              
+                            {{-- <div class="row">                              
                               <div class="col-md-12 text-center">
                                 <input type="submit" value="Show" class="btn btn-success">
                               </div>
-                            </div>                            
+                            </div>   --}}                          
                       </form>
                     </div>
                     

@@ -730,17 +730,26 @@ class StudentController extends Controller
        $paymenttypes = array_pluck(PaymentType::get(['id','name'])->toArray(),'name', 'id');
        $classes = array_pluck(ClassType::get(['id','alias'])->toArray(),'alias', 'id');
        $discounts = array_pluck(DiscountType::get(['id','name'])->toArray(),'name', 'id');
+       $paymentmodes = array_pluck(PaymentMode::get(['id','name'])->toArray(),'name', 'id');
        $sessions = array_pluck(SessionDate::orderBy('id','desc')->get(['id','date'])->toArray(),'date', 'id');
        $routes = array_pluck(TransportRoute::get(['id','name'])->toArray(),'name', 'id');
-       return view('admin.student.report.form',compact('classes','routes','sessions','centers','paymenttypes','discounts'));
+       return view('admin.student.report.form',compact('classes','routes','sessions','centers','paymenttypes','discounts','paymentmodes'));
      }     
      public function feeReportShow(Request $request)       
-     {    
-         $StudentFees =StudentFee::where('receipt_date', '>=', $request->from_date)
-                           ->where('receipt_date', '<=', $request->to_date)
+     {  
+        $center_id = $request->center;
+        $class_id = $request->class;
+        $section_id = $request->section;
+        $pement_mode = $request->pement_mode;
+
+        $studentsId=Student::where('center_id',$request->center)->pluck('id')->toArray(); 
+         $StudentFees =StudentFee::WhereIn('student_id', $studentsId)->where('created_at', '>=', $request->from_date)
+                           ->where('created_at', '<=', $request->to_date) 
+                           ->Where('session_id', $request->session)  
+                            
                            ->get();    
        $response = array(); 
-       $response['data']= view('admin.student.report.fee_result',compact('StudentFees'))->render();
+       $response['data']= view('admin.student.report.fee_result',compact('StudentFees','center_id','class_id','section_id','pement_mode'))->render();
            $response['status'] = 1;
            return $response;
 
