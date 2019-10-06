@@ -354,13 +354,27 @@
                               <p class="text-danger">{{ $errors->first('received_fees') }}</p>
                           </div>
                       </div>
+                      <div class="col-lg-6 ">                         
+                          <div class="form-group">
+                              {{ Form::label('payment_mode','Payment Mode ',['class'=>' control-label']) }}                         
+                              <select name="payment_mode" onchange="paymentMode(this.value)" class="form-control">
+                                @foreach ($paymentmodes as $paymentmode)
+                                  <option value="{{ $paymentmode->id }}">{{ $paymentmode->name }}</option>
+                                @endforeach
+                                
+                               
+                                
+                              </select>
+                              
+                          </div>
+                      </div>
                   </div>
               </div>
           </div>
       </div>{{--row end --}}
       <hr>
       <div class="row">{{--row start --}}
-          <div class="col-md-12 ">
+          <div class="col-md-12" style="display: none" id="cheque_mode">
           <h5 style="margin-left: 30px;">If Payment Mode is Cheque</h5>
               <div class="form-group">
                   <div class="col-md-12">
@@ -456,6 +470,16 @@
     }
     amountPayable();
   });
+  function paymentMode($value){
+    if($value==1){
+      $('#cheque_mode').hide();
+    }
+    else if($value==2){
+       $('#cheque_mode').show(); 
+    }else{
+      $('#cheque_mode').hide(); 
+    }
+  }
 </script>
  @if(Session::has('message'))
 <script type="text/javascript">

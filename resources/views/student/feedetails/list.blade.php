@@ -4,13 +4,22 @@
 @endpush
 @section('body')
 @php
-  $studentFees =App\StudentFee::where('student_id',$student->id)->where('session_id',$student->session_id)->get();
-@endphp
+   $studentFees =App\StudentFee::where('student_id',$student->id)->where('session_id',$student->session_id)->get();
+
+   if (!empty($studentFees[0]))
+      $priviousBalance =App\StudentFee::where('student_id',$student->id)->where('session_id',$student->session_id)->orderBy('id','desc')->first()->balance_fee;
+   else{
+    $priviousBalance=0;
+   }   
+   
+ 
+ @endphp
     <section class="content">
-     <div class="box">       
+      <div class="box">       
         <div class="box-header">
-        <ol class="breadcrumb text-left">         
-          <li><h4>Fee Details</h4></li>
+        <ol class="breadcrumb text-right">
+         <h4  style="float:left;">Student details</h4>
+         @if(count($studentFees) < $student->paymentType->times)<li><button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#addfee">Pay Fees</button></li>@endif
         </ol>
       </div>
       <!-- /.box-header -->
@@ -18,50 +27,325 @@
               <div class="col-md-9">
               <div class="row">
                 <div class="col-md-6">
-               {{--  @php
+                @php
                   $totalDepFee = 0;
+                 
                  foreach ($studentFees as $studentFe):
                    $totalDepFee += $studentFe->discount+$studentFe->received_fee;
                  endforeach
                  @endphp
-                 <h4> Balance : <b>{{$student->classFee->total_fee-$totalDepFee }}</b></h4>  --}}  
-                  @php
-                  $totalDepFee = 0;
-                 foreach ($studentFees as $studentFe):
-                   $totalDepFee += $studentFe->discount+$studentFe->received_fee;
-                 endforeach
-                 @endphp
-                      <h4> Balance : <b>{{$student->totalFee-$totalDepFee }}</b></h4>                    
-                </div>
-              </div>             
-            </div>       
-          </div>
+                      <h4> Balance : <b>{{$student->totalFee-$totalDepFee }}</b></h4>                      
+                     </div>
+              </div>
+              
+                  </div>
+              </div>
+               
             <!-- /.box-body -->
         </div>
           <!-- /.box -->
           <!-- Trigger the modal with a button -->
-         <div class="box">
-            <table class="table table-striped box">
-              <tr><th>Installment Fees </th><th>Discount</th><th>Receipt No</th><th>Receipt Date</th><th>Paid Fees</th>{{-- <th>Custom</th> --}}</tr>
-              @php
-                $totalFee=0;
-              @endphp
-              @foreach($studentFees as $studentFee)
-              @php
-                $totalFee+=$studentFee->received_fee+$studentFee->discount;
-              @endphp
-              <tr><td>{{ $studentFee->installment_fees }}</td><td>{{ $studentFee->discount }}</td><td>{{ $studentFee->receipt_no }}</td><td>{{ $studentFee->receipt_date }}</td><td>{{ $studentFee->received_fee }}</td>{{-- <td><a class="btn btn-warning btn-xs" href="{{ route('admin.student.fee.edit',$studentFee->id) }}"><i class="fa fa-eye"></i></a></td> --}}</tr>
-              @endforeach
-            </table>
-         </div>
+         
 
     </section>
     <!-- /.content -->
     <!-- Trigger the modal with a button -->
- 
-  
- 
- 
+<section class="content">
+   <table class="table table-striped box">
+            <tr>
+              <th>Installment Fees </th>
+              <th>Discount</th>
+              <th>Receipt No</th>
+              <th>Receipt Date</th>
+              <th>Other Fees</th>
+              <th>Paid Fees</th>
+              <th>Balance Fees</th>
+              <th>Custom</th>
+            </tr>
+            @php
+              $totalFee=0;
+               
+            @endphp
+            @foreach($studentFees as $studentFee)
+           
+            @php
+              $totalFee+=$studentFee->received_fee+$studentFee->discount;
+            @endphp
+            <tr>
+              <td>{{ $studentFee->installment_fees }}</td>
+              <td>{{ $studentFee->discount }}</td>
+              <td>{{ $studentFee->receipt_no }}</td>
+              <td>{{ date('d-m-Y',strtotime($studentFee->receipt_date)) }}</td>
+              <td>{{ $studentFee->other_fee }}</td>
+              <td>{{ $studentFee->received_fee }}</td>
+              <td>{{ $studentFee->balance_fee }}</td>
+              <td>
+                 
+                
+                 <a class="btn btn-info btn-xs" href="{{ route('student.receipt.fee',$studentFee->id) }}"><i class="fa fa-file-o"></i></a>
+               </td>
+             </tr>
+            @endforeach
+</table>
+</section>
+@if($student->payment_type_id && count($studentFees) < $student->paymentType->times )
+@php
+  @$balFee=$student->classFee->total_fee-$totalFee ;
+@endphp
+<!-- Modal -->
+<div id="addfee" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+    {{ Form::open(['route'=>'student.fee.paid.online']) }}
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Pay Fee</h4>
+      </div>
+      <div class="modal-body">         
+      <div class="row">
+      
+             {!! Form::hidden('student_id', $student->id, []) !!}
+             {!! Form::hidden('payment_type', $student->payment_type_id, []) !!}
+             {!! Form::hidden('student_payment_type', $student->paymentType->times, []) !!}
+             @if(count($studentFees) < 1)
+             
+             {!! Form::hidden('session_id', $student->session_id, []) !!}
+             {!! Form::hidden('admission_fees', $student->admission_fee, []) !!}
+             {!! Form::hidden('admission_form_fees', $student->admission_form_fee, []) !!}
+             {!! Form::hidden('registration_fees', $student->registration_fee, []) !!}
+             {!! Form::hidden('annual_charges', $student->annual_charge, []) !!}
+            
+             
+             {!! Form::hidden('activity_charges', ($student->activity_charge/$student->paymentType->times), []) !!}
+             {!! Form::hidden('smart_class_fees', ($student->smart_class_fee/$student->paymentType->times), []) !!}
+             {!! Form::hidden('sms_charges', ($student->sms_charge/$student->paymentType->times), []) !!}
+               @if ($student->tution_pay_time==null)
+               {!! Form::hidden('tution_fees', ($student->tution_fee/$student->paymentType->times), []) !!}
+                @else
+                {!! Form::hidden('tution_fees', ($student->tution_fee/$student->tution_pay_time), []) !!}
+               @endif
+               @if ($student->meal_pay_time==null)
+               {!! Form::hidden('caution_money', ($student->caution_money/$student->paymentType->times), []) !!}
+                @else
+                 {!! Form::hidden('caution_money', ($student->caution_money/$student->meal_pay_time), []) !!}
+               @endif
+              {!! Form::hidden('transport_fee', ($student->transport_fee/$student->paymentType->times), []) !!} 
+            @else
+            {!! Form::hidden('session_id', $student->session_id, []) !!}
+             {!! Form::hidden('activity_charges', ($student->activity_charge/$student->paymentType->times), []) !!}
+             {!! Form::hidden('smart_class_fees', ($student->smart_class_fee/$student->paymentType->times), []) !!}
+             {!! Form::hidden('sms_charges', ($student->sms_charge/$student->paymentType->times), []) !!}
+              @if ($student->tution_pay_time==null)
+              {!! Form::hidden('tution_fees', ($student->tution_fee/$student->paymentType->times), []) !!}
+               @else
+               {!! Form::hidden('tution_fees', ($student->tution_fee/$student->tution_pay_time), []) !!}
+              @endif
+              @if ($student->meal_pay_time==null)
+              {!! Form::hidden('caution_money', ($student->caution_money/$student->paymentType->times), []) !!}
+               @else
+                {!! Form::hidden('caution_money', ($student->caution_money/$student->meal_pay_time), []) !!}
+              @endif
+             {!! Form::hidden('transport_fee', ($student->transport_fee/$student->paymentType->times), []) !!} 
+             {!! Form::hidden('transport_fee', ($student->transport_fee/$student->paymentType->times), []) !!}
+            @endif
+      <div class="row">{{--row start --}}
+          <div class="col-md-12 ">
+              <div class="form-group">
+                  <div class="col-md-12">
+                       <div class="col-lg-6 " style="display: none">                         
+                          <div class="form-group">
+                              {{ Form::label('total_fees','Total Fees',['class'=>' control-label']) }}                         
+                              {{ Form::text('total_fees',round(@$student->totalFee),['class'=>'form-control','required','readonly']) }}
+                              <p class="text-danger">{{ $errors->first('total_fees') }}</p>
+                          </div>
+                      </div>
+                       <div class="col-lg-12">            
+                       @if(count($studentFees) < 1)
+                          <div class="form-group">
+                              {{ Form::label('installment_fees','Installment Fees',['class'=>' control-label']) }}                         
+                              {{ Form::text('installment_fees',round(@$instalfee=($student->firsttime_fee+($student->installment_fee/$student->paymentType->times))),['class'=>'form-control','required','readonly']) }}
+                              <p class="text-danger">{{ $errors->first('installment_fees') }}</p>
+                          </div>
+                        @else
+                        <div class="form-group">
+                              {{ Form::label('installment_fees','Installment Fees',['class'=>' control-label']) }}                         
+                              {{ Form::text('installment_fees',round(@$instalfee=$student->installment_fee/$student->paymentType->times),['class'=>'form-control','required','readonly']) }}
+                              <p class="text-danger">{{ $errors->first('installment_fees') }}</p>
+                          </div>
+                        @endif
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>{{--row end --}}   
+      <div class="row">{{--row start --}}
+          <div class="col-md-12 ">
+              <div class="form-group">
+                  <div class="col-md-12">
+                       <div class="col-lg-6 ">                         
+                          <div class="form-group">
+                              {{ Form::label('discount_type','Discount Type',['class'=>' control-label']) }} 
+                              {!! Form::hidden('discount_type_id', $student->discountType->id, []) !!}                        
+                              {{ Form::text('discount_name',$student->discountType->name ,['class'=>'form-control','required','readonly']) }}
+                              <p class="text-danger">{{ $errors->first('discount_type_id') }}</p>
+                          </div>
+                      </div>
+                       <div class="col-lg-6">   
+                            @if ($student->session_id==3)
+                              <div class="form-group">
+                                  {{ Form::label('discount','Discount',['class'=>' control-label']) }}
+                                 
+                                      @if($student->discount_type_id == 1)                    
+                                        {{ Form::number('discount',$discountfee=0,['class'=>'form-control','required','readonly']) }}     
+                                      @elseif($student->discount_type_id == 2)
+                                                            
+                                         @if($student->centers->id == 3)                                                       
+                                         {{ Form::number('discount',$discountfee=''.$student->classes->sibling_discount_omax.'',['class'=>'form-control','readonly']) }}
+                                          @else
+                                          {{ Form::number('discount',$discountfee=''.$student->classes->sibling_discount.'',['class'=>'form-control','readonly']) }}
+                                          @endif
+                                      @elseif($student->discount_type_id == 3)
+                                        {{ Form::number('discount',$discountfee=0,['class'=>'form-control','readonly']) }}
+                                      @endif
+                                  <p class="text-danger">{{ $errors->first('discount') }}</p>
+                              </div>
+                            @else 
+                            <div class="form-group">
+                                {{ Form::label('discount','Discount',['class'=>' control-label']) }}
+                               
+                                    @if($student->discount_type_id == 1)                    
+                                      {{ Form::number('discount',$discountfee=0,['class'=>'form-control','required','readonly']) }}     
+                                    @elseif($student->discount_type_id == 2)
+                                                          
+                                       @if($student->centers->id == 3)                                                       
+                                        {{ Form::number('discount',$discountfee=''.$student->classes->sibling_discount_omax.'',['class'=>'form-control','readonly']) }}
+                                        @else
+                                        {{ Form::number('discount',$discountfee=''.$student->classes->sibling_discount_omax.'',['class'=>'form-control','readonly']) }}
+                                        @endif
+                                    @elseif($student->discount_type_id == 3)
+                                      {{ Form::number('discount',$discountfee=0,['class'=>'form-control','readonly']) }}
+                                    @endif
+                                <p class="text-danger">{{ $errors->first('discount') }}</p>
+                            </div>
+                            @endif
+                          
+                        
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>{{--row end --}}   
+     
+     
+      <div class="row">{{--row start --}}
+          <div class="col-md-12 ">
+              <div class="form-group">
+                  <div class="col-md-12">                       
+                      <div class="col-lg-6">                         
+                          <div class="form-group">
+                          
+                              {{ Form::label('other_fee','Other Fee',['class'=>' control-label']) }}                         
+                              {{ Form::number('other_fee',0,['class'=>'form-control required','readonly']) }}
+                              <p class="text-danger">{{ $errors->first('other_fee') }}</p>
+                          </div>
+                      </div>
+                      <div class="col-lg-6">                         
+                          <div class="form-group">
+                          
+                              {{ Form::label('previous_balance','Previous Balance',['class'=>' control-label']) }} 
+                              {{ Form::text('previous_balance',$priviousBalance ,['class'=>'form-control','required','readonly']) }}
+                              
+                          </div>
+                      </div>
+                      <div class="col-lg-6" style="display: none">                         
+                          <div class="form-group">
+                          
+                              {{ Form::label('late_fee','Late Fee',['class'=>' control-label']) }} 
+                              {{ Form::text('late_fee',0 ,['class'=>'form-control','required']) }}
+                              
+                          </div>
+                      </div>
+                     
+                      <div class="col-lg-6 ">                         
+                          <div class="form-group">
+                              {{ Form::label('amount_payable','Amount Payable ',['class'=>' control-label']) }}                         
+                              {{ Form::number('amount_payable',round($amount_payble=$instalfee-$discountfee),['class'=>'form-control required','readonly']) }}
+                              <p class="text-danger">{{ $errors->first('amount_payable') }}</p>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 " style="display: none">                         
+                          <div class="form-group">
+                              {{ Form::label('received_fees','Received Fee ',['class'=>' control-label']) }}                         
+                              {{ Form::number('received_fees',round($amount_payble=$instalfee-$discountfee),['class'=>'form-control required']) }}
+                              <p class="text-danger">{{ $errors->first('received_fees') }}</p>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 ">                         
+                          <div class="form-group">
+                              {{ Form::label('payment_mode','Payment Mode ',['class'=>' control-label']) }}                         
+                              <select name="payment_mode" onchange="paymentMode(this.value)" class="form-control" disabled="">
+                                @foreach ($paymentmodes as $paymentmode)
+                                  <option value="{{ $paymentmode->id }}" {{ $paymentmode->id==3?'selected':'' }}>{{ $paymentmode->name }}</option>
+                                @endforeach
+                                
+                               
+                                
+                              </select>
+                              
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>{{--row end --}}
+      <hr>
+      <div class="row">{{--row start --}}
+          <div class="col-md-12" style="display: none" id="cheque_mode">
+          <h5 style="margin-left: 30px;">If Payment Mode is Cheque</h5>
+              <div class="form-group">
+                  <div class="col-md-12">
+                       <div class="col-lg-4">                         
+                          <div class="form-group">
+                              {{ Form::label('cheque_no','Cheque No',['class'=>' control-label']) }}                         
+                              {{ Form::text('cheque_no','',['class'=>'form-control']) }}
+                              <p class="text-danger">{{ $errors->first('cheque_no') }}</p>
+                          </div>
+                      </div>
+                       <div class="col-lg-4">                         
+                          <div class="form-group">
+                              {{ Form::label('bank_name','Bank Name',['class'=>' control-label']) }}                         
+                              {{ Form::text('bank_name','',['class'=>'form-control']) }}
+                              <p class="text-danger">{{ $errors->first('bank_name') }}</p>
+                          </div>
+                      </div>
+                       <div class="col-lg-4">                         
+                          <div class="form-group">
+                              {{ Form::label('cheque_date','Cheque Date',['class'=>' control-label']) }}                         
+                              {{ Form::text('cheque_date','',['class'=>'form-control datepicker']) }}
+                              <p class="text-danger">{{ $errors->first('cheque_date') }}</p>
+                          </div>
+                      </div>  
+                  </div>
+              </div>
+          </div>
+      </div>{{--row end --}} 
+         
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success">Pay</button>
+      </div>
+      {{ Form::close() }}
+    </div>
+
+  </div>
+</div>
+</div>
+
+@endif
 @endsection
 @push('links')
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
@@ -91,6 +375,43 @@
       $('#changeImg').addClass('hidden');
       $('#showImg').show();
     });
+    $("#other_fee").keyup(function(){
+       amountPayable();
+    });
+    $("#late_fee").keyup(function(){
+       amountPayable();
+    });
+    
+    $("#discount").keyup(function(){
+        amountPayable();
+       
+    });
+   
+    function amountPayable( other_fee=$("#other_fee").val(), discount=$("#discount").val(),installment_fees=$("#installment_fees").val(),previous_balance=$("#previous_balance").val(), late_fee=$("#late_fee").val()){
+        previous_balance = (previous_balance == '')?0:previous_balance;
+        other_fee = (other_fee == '')?0:other_fee;
+        discount = (discount == '')?0:discount;
+        installment_fees = (installment_fees == '')?0:installment_fees;
+        $("#amount_payable").val((parseInt(other_fee)+parseInt(installment_fees)+parseInt(previous_balance)+parseInt(late_fee))-parseInt(discount));
+        $("#received_fees").val((parseInt(other_fee)+parseInt(installment_fees)+parseInt(previous_balance)+parseInt(late_fee))-parseInt(discount));
+        //return $("#discount").val()+$("#transport_fee").val()+$("#installment_fees").val()-$("#discount").val();
+    }
+    amountPayable();
   });
+  function paymentMode($value){
+    if($value==1){
+      $('#cheque_mode').hide();
+    }
+    else if($value==2){
+       $('#cheque_mode').show(); 
+    }else{
+      $('#cheque_mode').hide(); 
+    }
+  }
 </script>
+ @if(Session::has('message'))
+<script type="text/javascript">
+    Command: toastr["{{ Session::get('class') }}"]("{{ Session::get('message') }}");
+</script>
+@endif
 @endpush

@@ -16,5 +16,5 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('online/response', 'Admin\StudentController@response'); 
+Route::post('online/response', 'Student\StudentController@response'); 
  

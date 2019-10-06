@@ -40,6 +40,8 @@ Route::group(['middleware' => 'admin'], function() {
              Route::get('class-fees-form', 'StudentController@studentClassByFeeForm')->name('admin.student.class.fees.form');
               Route::get('class-fees-form-details', 'StudentController@studentClassByFeeFormDetails')->name('admin.student.class.fees.form.details');
              Route::post('class-fees-update', 'StudentController@studentClassByFeeUpdate')->name('admin.student.class.fees.update');
+             Route::get('fee-report', 'StudentController@feeReport')->name('admin.student.fee.report');
+             Route::post('fee-report-show', 'StudentController@feeReportShow')->name('admin.student.fee.report.show');
         });
     });
     Route::group(['prefix' => 'class'], function() {

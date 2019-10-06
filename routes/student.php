@@ -75,6 +75,8 @@ Route::group(['middleware' => 'student'], function() {
           Route::group(['prefix' => 'feedetails'], function() {
          
         Route::get('list', 'StudentController@feedetails')->name('student.feedetails.list');
+        Route::post('pay-online', 'StudentController@onlinePay')->name('student.fee.paid.online');
+        Route::get('receipt/{studentFee}', 'StudentController@feeReceipt')->name('student.receipt.fee');
      
          
     });

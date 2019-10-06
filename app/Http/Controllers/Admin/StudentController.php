@@ -6,6 +6,7 @@ use App\Center;
 use App\ClassType;
 use App\DiscountType;
 use App\Http\Controllers\Controller;
+use App\PaymentMode;
 use App\PaymentType;
 use App\SessionDate;
 use App\Student;
@@ -205,6 +206,7 @@ class StudentController extends Controller
         $studentFee->previous_balance= $request->previous_balance;
         $studentFee->late_fee= $request->late_fee;
         $studentFee->month_name= $monthNames;
+        $studentFee->payment_mode= $request->payment_mode;
         if($studentFee->save()){ 
             return redirect()->back()->with(['class'=>'success','message'=>'student fee pay success ...']);
         }
@@ -349,7 +351,8 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        return view('admin.student.studentdetails.view',compact('student'));
+        $paymentmodes = PaymentMode::get();
+        return view('admin.student.studentdetails.view',compact('student','paymentmodes'));
     }
     public function excelData(){
 
@@ -721,6 +724,26 @@ class StudentController extends Controller
        
        }  
 
+    public function feeReport(Request $request)       
+    {            
+       $centers = Center::where('status',1)->get();
+       $paymenttypes = array_pluck(PaymentType::get(['id','name'])->toArray(),'name', 'id');
+       $classes = array_pluck(ClassType::get(['id','alias'])->toArray(),'alias', 'id');
+       $discounts = array_pluck(DiscountType::get(['id','name'])->toArray(),'name', 'id');
+       $sessions = array_pluck(SessionDate::orderBy('id','desc')->get(['id','date'])->toArray(),'date', 'id');
+       $routes = array_pluck(TransportRoute::get(['id','name'])->toArray(),'name', 'id');
+       return view('admin.student.report.form',compact('classes','routes','sessions','centers','paymenttypes','discounts'));
+     }     
+     public function feeReportShow(Request $request)       
+     {    
+         $StudentFees =StudentFee::where('receipt_date', '>=', $request->from_date)
+                           ->where('receipt_date', '<=', $request->to_date)
+                           ->get();    
+       $response = array(); 
+       $response['data']= view('admin.student.report.fee_result',compact('StudentFees'))->render();
+           $response['status'] = 1;
+           return $response;
 
+     }    
    
 }
