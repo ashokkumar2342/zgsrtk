@@ -20,7 +20,41 @@
         {{ $errors->first() }}         
             <!-- /.box-header -->
             <div class="box-body">
-              <form id="search" class="add_form" method="post" no-reset="true" success-content-id="fee_result" action="{{ route('admin.student.fee.report.show') }}" data-table-without-pagination="fee_result_table">
+              <div class="row">
+                  <div class="col-lg-12 ">  
+                     <div class="container">
+                     
+                       <ul class="nav nav-tabs">
+                         <li class="active"><a data-toggle="tab" href="#home">Receipt No</a></li>
+                         <li><a data-toggle="tab" href="#menu1" onclick="$('#tracking').val('')">Date Range</a></li>
+                         
+                       
+                       </ul>
+
+                       <div class="tab-content">
+                         <div id="home" class="tab-pane fade in active">
+                           
+                           <form id="search" class="add_form" method="post" no-reset="true" success-content-id="fee_result" action="{{ route('admin.student.fee.report.show') }}" data-table-without-pagination="fee_result_table">
+                          {{ csrf_field() }}
+                                 <div class="col-lg-3">   
+                                     <div class="form-group">
+                                         {{ Form::label('receipt',' Receipt No',['class'=>' control-label']) }}   
+                                                                   
+                                         {{ Form::text('receipt','',array('class' => 'form-control','id'=>'receipt' )) }}
+                                         </div>
+                                        
+                                     </div>
+                                 <div class="col-lg-3">                         
+                                   <div class="form-group">
+                                      <br>                       
+                                       <input type="submit" value="Show" class="btn btn-success">
+                                       </div>
+                                      
+                                   </div> 
+                            </form>
+                         </div>
+                         <div id="menu1" class="tab-pane fade">
+                           <form id="search" class="add_form" method="post" no-reset="true" success-content-id="fee_result" action="{{ route('admin.student.fee.report.show') }}" data-table-without-pagination="fee_result_table">
                           {{ csrf_field() }}
                 <div class="row">
                     <div class="col-lg-12 ">  
@@ -117,6 +151,18 @@
                               </div>
                             </div>   --}}                          
                       </form>
+                         </div>
+                        
+                       </div>
+                     </div>
+
+                                      
+                                             
+                  
+                  </div>
+                  
+              </div>
+             
                     </div>
                     
                 </div>

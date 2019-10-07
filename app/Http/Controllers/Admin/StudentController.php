@@ -742,13 +742,15 @@ class StudentController extends Controller
         $class_id = $request->class;
         $section_id = $request->section;
         $pement_mode = $request->pement_mode;
-
-        $studentsId=Student::where('center_id',$request->center)->pluck('id')->toArray(); 
-         $StudentFees =StudentFee::WhereIn('student_id', $studentsId)->where('created_at', '>=', $request->from_date)
-                           ->where('created_at', '<=', $request->to_date) 
-                           ->Where('session_id', $request->session)  
-                            
-                           ->get();    
+        if ($request->receipt!=null) {
+           $StudentFees =StudentFee::where('receipt_no', $request->receipt)->get();      
+        }else{
+            $studentsId=Student::where('center_id',$request->center)->pluck('id')->toArray(); 
+                     $StudentFees =StudentFee::WhereIn('student_id', $studentsId)->where('created_at', '>=', $request->from_date)
+                                       ->where('created_at', '<=', $request->to_date) 
+                                       ->Where('session_id', $request->session)  
+                                       ->get();    
+        } 
        $response = array(); 
        $response['data']= view('admin.student.report.fee_result',compact('StudentFees','center_id','class_id','section_id','pement_mode'))->render();
            $response['status'] = 1;

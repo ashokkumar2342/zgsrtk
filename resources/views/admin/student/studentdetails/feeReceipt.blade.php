@@ -136,13 +136,31 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                     <td class="style1">
+                                    <td class="style1">
+                                       
+                                       <span id="lblRegistraionFees7" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Month:</span>
+                                   </td>
+                                   <td>
+
+                                       <span id="lblMother1" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;">{{ $studentFee->month_name }}</span> 
+                                   </td>
+                                    <td class="style1">
                                         
-                                        <span id="lblRegistraionFees7" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Month:</span>
+                                        <span id="lblRegistraionFees7" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Mobile No:</span>
                                     </td>
                                     <td>
+                                        
+                                        <span id="lblMother1" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{$studentFee->student->mobile_one}}</span>
+                                    </td>
+                                </tr>
+                                <tr >
+                                     <td class="style1">
+                                        
+                                        <span id="lblRegistraionFees7" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Address:</span>
+                                    </td>
+                                    <td colspan="2">
 
-                                        <span id="lblMother1" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;">{{ $studentFee->month_name }}</span> 
+                                        <span id="lblMother1" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;">{{ $studentFee->student->address or '' }}</span> 
                                     </td>
                                 </tr>
                             </table>
@@ -454,16 +472,34 @@
                                         <span id="lblMother1" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{$studentFee->student->mother_name}}</span>
                                     </td>
                                 </tr>
-                                   <tr>
-                                     <td class="style1">
-                                        
-                                        <span id="lblRegistraionFees7" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Month:</span>
-                                    </td>
-                                    <td>
+                              <tr>
+                                  <td class="style1">
+                                     
+                                     <span id="lblRegistraionFees7" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Month:</span>
+                                 </td>
+                                 <td>
 
-                                        <span id="lblMother1" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;">{{ $studentFee->month_name }}</span> 
-                                    </td>
-                                </tr>
+                                     <span id="lblMother1" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;">{{ $studentFee->month_name }}</span> 
+                                 </td>
+                                  <td class="style1">
+                                      
+                                      <span id="lblRegistraionFees7" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Mobile No:</span>
+                                  </td>
+                                  <td>
+                                      
+                                      <span id="lblMother1" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">{{$studentFee->student->mobile_one}}</span>
+                                  </td>
+                              </tr>
+                              <tr >
+                                   <td class="style1">
+                                      
+                                      <span id="lblRegistraionFees7" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Address:</span>
+                                  </td>
+                                  <td colspan="2">
+
+                                      <span id="lblMother1" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;">{{ $studentFee->student->address or '' }}</span> 
+                                  </td>
+                              </tr>
                             </table>
                         </div>
                         <div style="width: 450px; margin-top: 10px;">
