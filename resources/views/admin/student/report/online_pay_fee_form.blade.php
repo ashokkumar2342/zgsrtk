@@ -36,7 +36,7 @@
                            <div id="home" class="tab-pane fade in active">
                              
                             <form id="search" class="add_form" method="post" no-reset="true" success-content-id="fee_result" action="{{ route('admin.student.online.pay.fee.report.show') }}" data-table-without-pagination="fee_result_table">
-                          {{ csrf_field() }}
+                            {{ csrf_field() }}
                                    <div class="col-lg-3">   
                                        <div class="form-group">
                                            {{ Form::label('tracking_no',' Tracking No',['class'=>' control-label']) }}   

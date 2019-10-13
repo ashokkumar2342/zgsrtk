@@ -13,6 +13,7 @@
     <th>Father's Name</th>
     <th>Mother's Name</th>
     <th>Mobile No.</th>
+    <th>Month</th>
     <th>Payment Mode</th>
     <th>Received Amount</th>
     <th>Action</th>
@@ -31,6 +32,7 @@
       <td>{{ $StudentFee->student->father_name  or '' }}</td>
       <td>{{ $StudentFee->student->mother_name  or '' }}</td>
       <td>{{ $StudentFee->student->mobile_one  or '' }}</td>
+      <td class="text-nowrap">{{ $StudentFee->month_name  }}</td>
       <td>{{ $StudentFee->paymentMode->name or ''   }}</td>
       <td>{{ $StudentFee->received_fee   }}</td>
       <td class="text-nowrap">

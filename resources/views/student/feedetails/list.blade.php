@@ -267,7 +267,10 @@
                               
                           </div>
                       </div>
-                     
+                     @php
+                       $amount_payble=$instalfee-$discountfee;
+                       session()->put('amount_payable', Crypt::encrypt($amount_payble));
+                     @endphp
                       <div class="col-lg-6 ">                         
                           <div class="form-group">
                               {{ Form::label('amount_payable','Amount Payable ',['class'=>' control-label']) }}                         

@@ -14,6 +14,7 @@ use App\StudentFee;
 use App\TempStudentFee;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Softon\Indipay\Facades\Indipay;
 use Storage;
  
@@ -168,16 +169,20 @@ class StudentController extends Controller
      * @return \Illuminate\Http\Response
      */
    public function onlinePay(Request $request)
-   {    
-     $order_id =$request->student_id.StudentFee::orderBy('id','DESC')->first()->id + 1;
-    $tid = date('Ymdhms');
+   {   
+    $amount =Crypt::decrypt(session()->get('amount_payable'));
+    $student_id =Auth::guard('student')->user()->id;
+     $reciept_no =$student_id.StudentFee::orderBy('id','DESC')->first()->id + 1;
+    $tid =  date('Ymdhms');
+    $order_id = date('Ymdhms');
       $student =Student::find($request->student_id);  
-      $this->tempStudentFeeStore($request,$order_id);
+      $this->tempStudentFeeStore($request,$order_id,$amount,$student_id);
         $parameters = [             
                'tid' => $tid,               
                'order_id' => $order_id,               
-               'amount' => $request->amount_payable, 
-               'merchant_param1' => $request->student_id,               
+               'amount' => $amount, 
+               'merchant_param1' => $student_id,               
+               'merchant_param2' => $reciept_no,               
                             
                'billing_name' => $student->name,               
                'billing_address' => $student->address,               
@@ -198,7 +203,7 @@ class StudentController extends Controller
         $response = Indipay::response($request); 
         $oph =OnlinePaymentHistory::firstOrNew(['order_id'=>$response['order_id']]);
  
-        if ($response['order_status']=='Success') {
+        if ($response['order_status']=='Success') { 
           // For default Gateway 
           $oph->student_id=  $response['merchant_param1'];
           $oph->order_id= $response['order_id'];
@@ -236,7 +241,7 @@ class StudentController extends Controller
           $oph->retry= $response['retry'];
           $oph->response_code= $response['response_code'];
           $oph->billing_notes= $response['billing_notes'];
-          $oph->trans_date= date('Y-m-d h:s',strtotime($response['trans_date']));
+          $oph->trans_date= $response['trans_date'];
           $oph->bin_country= $response['bin_country'];
           $oph->status= 1;
           $oph->save();
@@ -283,7 +288,7 @@ class StudentController extends Controller
             $oph->retry= $response['retry'];
             $oph->response_code= $response['response_code'];
             $oph->billing_notes= $response['billing_notes'];
-            $oph->trans_date= date('Y-m-d h:s',strtotime($response['trans_date']));
+            $oph->trans_date= $response['trans_date'];
             $oph->bin_country= $response['bin_country'];
             $oph->status= 0;
             $oph->save();
@@ -342,7 +347,7 @@ class StudentController extends Controller
 
     }
     //temporary save
-    public function tempStudentFeeStore($request,$receipt_no){
+    public function tempStudentFeeStore($request,$receipt_no,$amount,$student_id){
         // return dd($request->all());
         $this->validate($request,[
             'total_fees' => 'required|numeric',
@@ -440,7 +445,7 @@ class StudentController extends Controller
          }
         $receipt_no =$receipt_no;
         $studentFee = TempStudentFee::firstOrNew(['receipt_no'=>$receipt_no]);
-        $studentFee->student_id = $request->student_id;
+        $studentFee->student_id = $student_id;
         $studentFee->session_id = $request->session_id;
         $studentFee->total_fees = $request->total_fees;
         $studentFee->other_fee = $request->other_fee;
@@ -449,12 +454,12 @@ class StudentController extends Controller
         $studentFee->discount = $request->discount;
         $studentFee->receipt_no = $receipt_no;
         $studentFee->receipt_date = date('Y-m-d');
-        $studentFee->amount_payable = $request->amount_payable;
+        $studentFee->amount_payable = $amount;
         $studentFee->cheque_no = $request->cheque_no;
         $studentFee->bank_name = $request->bank_name;
         $studentFee->cheque_date = $request->cheque_date;
-        $studentFee->received_fee = $request->received_fees;
-        $studentFee->balance_fee = $request->amount_payable-$request->received_fees;
+        $studentFee->received_fee = $amount;
+        $studentFee->balance_fee = $amount-$amount;
         $studentFee->installment_fees = $request->installment_fees;
         
         $studentFee->admission_fee =$request->admission_fees ;

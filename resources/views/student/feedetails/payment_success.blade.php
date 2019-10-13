@@ -50,7 +50,7 @@
         Date :  
       </div> 
       <div class="col-lg-6">
-         {{ date('d-m-Y',strtotime($oph->trans_date))  }}
+         {{ $oph->trans_date  }}
       </div>
      </div>
      <br>
