@@ -56,71 +56,7 @@ class StudentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {        
-        // $this->validate($request,[
-        //     'center' => 'required|numeric',
-        //     'session' => 'required|numeric',
-        //     'class' => 'required|numeric',
-        //     "section" => 'required|numeric',
-        //     "date_of_admission" => 'required|date',
-        //     "student_name" => 'required|max:199',
-        //     "father_name" => 'required|max:199',
-        //     "mother_name" => 'required|max:199',
-        //     "date_of_birth" => 'required|max:199',
-        //     "religion" => "required|max:199",
-        //     "category" => "required|max:199",
-        //     "address" => 'required|max:1000',
-        //     "state" => "required|max:199",
-        //     "city" => "required|max:199",
-        //     "pincode" => 'required|numeric',
-        //     "mobile_one" => 'nullable|numeric',
-        //     "mobile_two" => 'nullable|numeric',
-        //     "mobile_sms" => 'required|numeric',
-        //     'student_photo' => 'required|image|mimes:jpeg,bmp,png,gif|between:2,2024',
-        //     'total_fee' => 'required|numeric',
-        //     'payment_type' => 'required|numeric'
-      
-        // ]);
-        // $file = $request->file('student_photo');
-        // $file->store('student/profile');
-        // $username = str_random('6');
-        // $chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-        // $password = bcrypt(substr( str_shuffle( $chars ), 0, 6 ));
-        // $student= new Student();
-        // $student->username= $username;
-        // $student->password= $password;
-        // $student->center_id= $request->center;
-        // $student->session_id= $request->session;
-        // $student->class_id= $request->class;
-        // $student->section_id= $request->section;
-        // $student->totalFee= $request->total_fee;
-        // $student->date_of_admission= date('Y-m-d',strtotime($request->date_of_admission));
-        // $student->name= $request->student_name;
-        // $student->father_name= $request->father_name;
-        // $student->mother_name= $request->mother_name;
-        // $student->dob= date('Y-m-d',strtotime($request->date_of_birth));
-        // $student->religion= $request->religion;
-        // $student->category= $request->category;
-        // $student->address= $request->address;
-        // $student->state= $request->state;
-        // $student->city= $request->city;
-        // $student->pincode= $request->pincode;
-        // $student->pincode= $request->total_fee;
-        // $student->mobile_one= $request->mobile_one;
-        // $student->mobile_two= $request->mobile_two;
-        // $student->mobile_sms= $request->mobile_sms;
-        // $student->payment_type_id= $request->payment_type;
-        // $student->picture= $file->hashName();
-        // if($student->save()){            
-        //     $student->username= 'zgs'.$student->id;
-        //     $student->save();
-        //     return redirect()->route('admin.student.view',$student->id)->with(['class'=>'success','message'=>'student registration success ...']);
-        // }
-        // return redirect()->back()->with(['class'=>'error','message'=>'Whoops ! Look like somthing went wrong ..']);
 
-
-    }
 
     /**
      * Display the specified resource.
@@ -172,17 +108,17 @@ class StudentController extends Controller
    {   
     $amount =Crypt::decrypt(session()->get('amount_payable'));
     $student_id =Auth::guard('student')->user()->id;
-     $reciept_no =$student_id.StudentFee::orderBy('id','DESC')->first()->id + 1;
+     $receipt_no =$student_id.StudentFee::orderBy('id','DESC')->first()->id + 1;
     $tid =  date('Ymdhms');
     $order_id = date('Ymdhms');
       $student =Student::find($request->student_id);  
-      $this->tempStudentFeeStore($request,$order_id,$amount,$student_id);
+      $this->tempStudentFeeStore($request,$order_id,$receipt_no,$amount,$student_id);
         $parameters = [             
                'tid' => $tid,               
                'order_id' => $order_id,               
                'amount' => $amount, 
                'merchant_param1' => $student_id,               
-               'merchant_param2' => $reciept_no,               
+               'merchant_param2' => $receipt_no,               
                             
                'billing_name' => $student->name,               
                'billing_address' => $student->address,               
@@ -207,6 +143,7 @@ class StudentController extends Controller
           // For default Gateway 
           $oph->student_id=  $response['merchant_param1'];
           $oph->order_id= $response['order_id'];
+          $oph->receipt_no=  $response['merchant_param2'];
           $oph->tracking_id= $response['tracking_id'];
           $oph->bank_ref_no= $response['bank_ref_no'];
           $oph->order_status= $response['order_status'];
@@ -253,6 +190,7 @@ class StudentController extends Controller
         }else{
 
             $oph->student_id=  $response['merchant_param1'];
+            $oph->receipt_no=  $response['merchant_param2'];
             $oph->order_id= $response['order_id'];
             $oph->tracking_id= $response['tracking_id'];
             $oph->bank_ref_no= $response['bank_ref_no'];
@@ -305,10 +243,9 @@ class StudentController extends Controller
      * @param  \App\StudentDetails  $studentDetails
      * @return \Illuminate\Http\Response
      */
-    public function payFee($oph){
-     
-        $tempStudentFee =TempStudentFee::where('receipt_no',$oph->order_id)->first();
-        $studentFee = StudentFee::firstOrNew(['receipt_no'=>$tempStudentFee->receipt_no]);
+    public function payFee($oph){ 
+        $tempStudentFee =TempStudentFee::where('order_id',$oph->order_id)->first();
+        $studentFee = StudentFee::firstOrNew(['order_id'=>$tempStudentFee->order_id]);
         $studentFee->online_payment_history_id = $oph->id;
         $studentFee->student_id = $tempStudentFee->student_id;        
         $studentFee->session_id = $tempStudentFee->session_id;
@@ -347,7 +284,7 @@ class StudentController extends Controller
 
     }
     //temporary save
-    public function tempStudentFeeStore($request,$receipt_no,$amount,$student_id){
+    public function tempStudentFeeStore($request,$order_id,$receipt_no,$amount,$student_id){
         // return dd($request->all());
         $this->validate($request,[
             'total_fees' => 'required|numeric',
@@ -443,9 +380,10 @@ class StudentController extends Controller
             }
           
          }
-        $receipt_no =$receipt_no;
-        $studentFee = TempStudentFee::firstOrNew(['receipt_no'=>$receipt_no]);
+        
+        $studentFee = TempStudentFee::firstOrNew(['order_id'=>$order_id]);
         $studentFee->student_id = $student_id;
+        $studentFee->order_id = $order_id;
         $studentFee->session_id = $request->session_id;
         $studentFee->total_fees = $request->total_fees;
         $studentFee->other_fee = $request->other_fee;

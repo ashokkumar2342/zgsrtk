@@ -271,7 +271,7 @@
                           </div>
                       </div>
                      @php
-                       $amount_payble=$instalfee-$discountfee;
+                       $amount_payble=round($instalfee-$discountfee);
                        session()->put('amount_payable', Crypt::encrypt($amount_payble));
                      @endphp
                       <div class="col-lg-6 ">                         
