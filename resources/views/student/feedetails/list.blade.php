@@ -19,10 +19,10 @@
         <div class="box-header">
         <ol class="breadcrumb text-right">
          <h4  style="float:left;">Student details</h4>
-         {{-- @if(count($studentFees)  < $student->paymentType->times) --}}
+         @if(count($studentFees)  < $student->paymentType->times)
          <li>
           <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#addfee">Pay Fees</button></li>
-         {{-- @endif --}}
+         @endif
         </ol>
       </div>
       <!-- /.box-header -->
