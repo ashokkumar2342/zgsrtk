@@ -33,7 +33,7 @@
                   $totalDepFee = 0;
                  
                  foreach ($studentFees as $studentFe):
-                   $totalDepFee += $studentFe->discount+$studentFe->received_fee;
+                   $totalDepFee += $studentFe->discount+$studentFe->received_fee-($studentFe->other_fee)-($studentFe->late_fee);
                  endforeach
                  @endphp
                       <h4> Balance : <b>{{$student->totalFee-$totalDepFee }}</b></h4>                      
