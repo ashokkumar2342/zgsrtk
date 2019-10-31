@@ -48,18 +48,18 @@ class SendSms
         
         
         
-        $msg=urlencode($event->message);
+        // $msg=urlencode($event->message);
  
  
-        $url = "http://180.179.218.150/sendurlcomma.aspx?user=20089373&pwd=123456&senderid=ZADRTK&mobileno=$event->mobile&msgtext=$msg&smstype=13"; 
+        // $url = "http://180.179.218.150/sendurlcomma.aspx?user=20089373&pwd=123456&senderid=ZADRTK&mobileno=$event->mobile&msgtext=$msg&smstype=13"; 
  
-        $url = "http://180.179.218.150/sendurlcomma.aspx?user=20089373&pwd=123456&senderid=ZADRTK&mobileno=$event->mobile&msgtext=$msg&smstype=13";
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $curl_scraped_page = curl_exec($ch);
-        curl_close($ch);
+        // $url = "http://180.179.218.150/sendurlcomma.aspx?user=20089373&pwd=123456&senderid=ZADRTK&mobileno=$event->mobile&msgtext=$msg&smstype=13";
+        // $ch = curl_init($url);
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // $curl_scraped_page = curl_exec($ch);
+        // curl_close($ch);
       
-        Log::info($event->mobile.' : '.$event->message);
+        // Log::info($event->mobile.' : '.$event->message);
 
        // $msg=urlencode($event->message);
         
@@ -71,6 +71,15 @@ class SendSms
        //  curl_close($ch);
         
        //  Log::info($event->mobile.' : '.$event->message);
+
+
+        $msg=urlencode($event->message); 
+        $url = "http://smsdealnow.com/api/pushsms.php?usr=516001&key=010Av2NN20YRxgyh6z4KMf01owU8Ry&sndr=ZGSRTK&ph=$event->mobile&text=$event->message&rpt=1";
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $curl_scraped_page = curl_exec($ch);
+        curl_close($ch); 
+        Log::info($event->mobile.' : '.$event->message);    
          
     }
 }
