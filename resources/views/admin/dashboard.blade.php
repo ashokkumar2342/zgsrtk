@@ -18,7 +18,7 @@
       <ol class="breadcrumb">
        <li> <i class="fa fa-envelope"></i> SMS Balance</li>
         <li>
-          @php
+        {{--   @php
             $url = "http://180.179.218.150/balance.asp?user=20089373&pwd=123456";
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -27,8 +27,17 @@
           @endphp
 
 
-          <input type=""   readonly="" value="{{ $curl_scraped_page }}" name="">
-            {{-- <input type=""   readonly="" value="{{ $smsBalance }}" name="">  --}}
+          <input type=""   readonly="" value="{{ $curl_scraped_page }}" name=""> --}}
+           @php
+             $url = "http://smsdealnow.com/api/balance.php?usr=516001&key=010Av2NN20YRxgyh6z4KMf01owU8Ry";
+             $ch = curl_init($url);
+             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+             $curl_scraped_page = curl_exec($ch);
+             curl_close($ch);
+           @endphp
+
+
+           <input type=""   readonly="" value="{{ $curl_scraped_page }}" name="">
              
             </li>
  
