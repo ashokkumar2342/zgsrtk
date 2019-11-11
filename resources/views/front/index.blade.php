@@ -14,7 +14,7 @@
          <h4 style="color:#fff">School Circulars</h4>
        </div>
         </a>
-       <a href="https://smarthubeducation.hdfcbank.com/SmartFees/Landing.action?instId=4762" title="Online Pay" target="_blank">
+       <a href="{{ route('student.home') }}" title="Online Pay">
        <div  class="col-lg-4 bg-info" style="background-color: green">
          <h4 style="color:#fff">Pay Online Fee</h4> 
        </div>
@@ -53,7 +53,10 @@
              <img src="{!! url('uploads/'.$slider->image) !!}" class="img-responsive" width="100%" alt="">
            </div><!-- slide item -->                 
             @endforeach
-          
+            <div class="banner-item  swiper-slide">
+             <img src="{!! url('uploads/'.$slider->image) !!}" class="img-responsive" width="100%" alt="">
+           </div><!-- slide item --> 
+         
             
         </div><!-- swiper-wrapper -->
         <div class="swiper-pagination"></div>
@@ -126,18 +129,16 @@
         </div>
         
       </div>
-    </section>
-
- 
-
+    </section> 
 
   	<!-- About Start here -->
-  	<section class="about about-two padding-120">
+  	<section class="about about-two padding-10">
   		<div class="container">
   			<div class="row">
         <div class="col-md-12">
             <div class="about-content">
-              <h4 style="font-size: 36px;color: #ffc000;">Welcome To ZAD Global School</h4>
+              <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fzadglobalschool%2Fvideos%2F369372960671589%2F&show_text=0&width=500" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+              <h4 style="font-size: 36px;color: #ffc000;">Welcome To ZAD Global School</h4> 
               <img src="{{ asset('images/about/about-2.png') }}" align="right" alt="about image" class="img-responsive" style="height: 150px;">
 
               <p>ZAD Education Society was inaugurated by Hon’ble PADAMSHRI SETH Shrikrishan Das (Ex. Finance Minister, Haryana Govt.) on 18 August 1996</p>
@@ -146,10 +147,11 @@
               <li><a href="{{ route('front.about') }}" class="button-default">Read More</a></li>
             </ul>
             </div><!-- about content -->
+           
           </div>
   				 
          
-  				
+  			
   			</div><!-- row -->
   		</div><!-- container -->
   	</section><!-- about -->

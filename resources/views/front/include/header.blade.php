@@ -1,22 +1,16 @@
-<style>
-  .header-two .top-contents .icon {
-      display: inline-block;
-      float: left;
-      margin-right: 15px;
-      color: #fffae9;
-</style>
+ 
 <div class="row">
    <div class="col-lg-2" style="background-color: #000;
-    padding: 5px;
+    padding: 0px;
     padding-left: 50px;
-    font-size: 20px;">
+    font-size: 21px;">
         <span style="padding:5px auto;color:#fff">
          <b> Latest News</b> <i class="fa fa-space-shuttle faa-passing animated"></i> </span>  
     </div> 
-    <div class="col-lg-10" style="padding:1px;color:#fff;); font-size:1.2em; background:rgb(103, 174, 223)"> 
+    <div class="col-lg-10" style="padding:0px;color:#fff;); font-size:1em; background:rgb(36, 37, 37)"> 
           
                  <marquee onmouseover="this.stop();" onmouseout="this.start();">
-                              {{ $notices =App\Notice::find(1)->news }}
+                          <b>    {{ $notices =App\Notice::find(1)->news }}</b>
                 </marquee>
           
                   
@@ -50,13 +44,9 @@
     </div> -->
 
     <!-- Preloader end here -->
-    <style >
-      .header-two .top-contents .content p {
-    margin: 0px;
-    color: #fffcfc;
-    </style>
+  
   	<header class="header-two">
-  		<div class="header-top" style="background-color:#B40303;color:#fff">
+  		<div class="header-top" >
   			<div class="container">
   				<div class="row">
             <div class="col-md-3">
