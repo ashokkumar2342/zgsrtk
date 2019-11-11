@@ -1,5 +1,5 @@
  
-<div class="row">
+ 
    <div class="col-lg-2" style="background-color: #000;
     padding: 0px;
     padding-left: 50px;
@@ -15,7 +15,7 @@
           
                   
     </div>     
-</div>       
+        
   <div id="myModal" class="modal fade" role="dialog">
           <div class="modal-dialog"> 
             <!-- Modal content-->

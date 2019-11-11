@@ -130,14 +130,14 @@
         
       </div>
     </section> 
-
+<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fzadglobalschool%2Fvideos%2F369372960671589%2F&show_text=0&width=500" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
   	<!-- About Start here -->
   	<section class="about about-two padding-10">
   		<div class="container">
   			<div class="row">
         <div class="col-md-12">
             <div class="about-content">
-              <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fzadglobalschool%2Fvideos%2F369372960671589%2F&show_text=0&width=500" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+              
               <h4 style="font-size: 36px;color: #ffc000;">Welcome To ZAD Global School</h4> 
               <img src="{{ asset('images/about/about-2.png') }}" align="right" alt="about image" class="img-responsive" style="height: 150px;">
 
