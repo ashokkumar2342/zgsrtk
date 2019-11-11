@@ -130,7 +130,7 @@
         
       </div>
     </section> 
-<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fzadglobalschool%2Fvideos%2F369372960671589%2F&show_text=0&width=500" width="100%" height="500" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fzadglobalschool%2Fvideos%2F369372960671589%2F&show_text=0&width=550" width="100%" height="550" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
   	<!-- About Start here -->
   	<section class="about about-two padding-10">
   		<div class="container">
