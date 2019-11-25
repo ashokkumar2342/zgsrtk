@@ -15,6 +15,7 @@
     <th>Mobile No.</th>
     <th>Month</th>
     <th>Payment Mode</th>
+    <th>Balance</th>
     <th>Received Amount</th>
     <th>Action</th>
                  
@@ -34,6 +35,7 @@
       <td>{{ $StudentFee->student->mobile_one  or '' }}</td>
       <td class="text-nowrap">{{ $StudentFee->month_name  }}</td>
       <td>{{ $StudentFee->paymentMode->name or ''   }}</td>
+      <td>{{ $StudentFee->balance_fee or ''   }}</td>
       <td>{{ $StudentFee->received_fee   }}</td>
       <td class="text-nowrap">
         <a class="btn btn-primary btn-xs" target="blank" title="View Student" href="{{ route('admin.student.view',$StudentFee->student_id) }}"><i class="fa fa-eye"></i></a>        
