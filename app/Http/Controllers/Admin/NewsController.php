@@ -33,20 +33,21 @@ class NewsController extends Controller
         'file' => 'mimes:pdf,docx|max:3000|nullable',             
              
           ]);
+          $gallery = new News();
           if ($request->hasFile('file')) {
 
               $imageFile = $request->file('file');
               $imageName = $imageName = time().$imageFile->getClientOriginalName();
               $imageFile->move(public_path('uploads'),$imageName);
-              $gallery = new News();
+             
               $gallery->file = $imageName;  
-              $gallery->news = $request->news;           
-
-              $gallery->save();
+             
 
               
           }     
-         
+         $gallery->news = $request->news;           
+
+         $gallery->save();
         // $news = News::create([
         //     'news' => $request['news'],
             
