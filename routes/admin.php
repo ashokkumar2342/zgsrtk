@@ -195,6 +195,15 @@ Route::group(['middleware' => 'admin'], function() {
         Route::put('update/{notice}', 'NoticeController@update')->name('admin.notice.update');
         Route::delete('delete/{notice}', 'NoticeController@destroy')->name('admin.notice.delete');
       }); 
+       Route::group(['prefix' => 'video'], function() {
+        // Route::get('new', 'NewsController@index')->name('admin.news.n');
+        Route::get('video', 'VideoController@index')->name('admin.video.list');        
+        Route::post('video', 'VideoController@store')->name('admin.video.post');        
+        Route::get('edit/{video}', 'VideoController@edit')->name('admin.video.edit');
+        Route::put('update/{video}', 'VideoController@update')->name('admin.video.update');
+        Route::delete('delete/{video}', 'VideoController@destroy')->name('admin.video.delete');
+      }); 
+     
 
      //------------------------Birthday sms-------------------------------------------
     Route::group(['prefix' => 'birthday'], function() {

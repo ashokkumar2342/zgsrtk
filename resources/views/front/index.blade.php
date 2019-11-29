@@ -130,7 +130,26 @@
         
       </div>
     </section> 
-<iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fzadglobalschool%2Fvideos%2F369372960671589%2F&show_text=0&width=550" width="100%" height="550" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+    <!-- Classes Start here -->
+        <section class="classes" style="background-color: #ffc000">
+          <div class="container">
+            <div class="section-header">
+              <h3>Video</h3>
+              <p>---------------------------------</p>
+            </div>
+            <div class="row">
+              @foreach ($videos as $video)
+               <div class="col-md-4 col-sm-6 col-xs-12">
+                 <div class="class-item">
+                   <iframe src="{{ $video->url }}" width="100%" height="250" style="border:none;overflow:hidden" frameborder="0"   allowFullScreen="true"></iframe>
+                             
+                 </div><!-- class item -->
+               </div>
+              @endforeach
+              
+        </section><!-- classes -->
+        <!-- Classes End here -->
+ 
   	<!-- About Start here -->
   	<section class="about about-two padding-10">
   		<div class="container">
@@ -278,54 +297,7 @@
   	<!-- Teachers Start here -->
     
 
-<!-- Classes Start here -->
-    <section class="classes">
-      <div class="container">
-        <div class="section-header">
-          <h3>Video</h3>
-          <p>---------------------------------</p>
-        </div>
-        <div class="row">
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="class-item">
-              <iframe width="100%" height="250" src="https://www.youtube.com/embed/MRQO2OBIipI" frameborder="0" allowfullscreen></iframe>          
-            </div><!-- class item -->
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="class-item">               
-              <iframe width="100%" height="250" src="https://www.youtube.com/embed/_u9B-50RUmc" frameborder="0" allowfullscreen></iframe>          
-            </div><!-- class item -->
-          </div>
-           <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="class-item">               
-              <iframe width="100%" height="250" src="https://www.youtube.com/embed/aVjynEQTVeM" frameborder="0" allowfullscreen></iframe>          
-            </div><!-- class item -->
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="class-item">               
-              <iframe width="100%" height="250" src="https://www.youtube.com/embed/UYFlH7pIFaI" frameborder="0" allowfullscreen></iframe>          
-            </div><!-- class item --> 
-          </div>
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="class-item">               
-              <iframe width="100%" height="250" src="https://www.youtube.com/embed/Wqv-pPMtVlM" frameborder="0" allowfullscreen></iframe>          
-            </div><!-- class item --> 
-          </div>
 
- 
-           <div class="col-md-4 col-sm-6 col-xs-12">
-            <div class="class-item">
-              <iframe width="100%" height="250" src="https://www.youtube.com/embed/BS_J6r0O2Ck" frameborder="0" allowfullscreen></iframe>          
-            </div><!-- class item --> 
-          </div>
-          </div>
-        </div><!-- row -->
-        <div class="class-button">
-          <a href="https://www.youtube.com/channel/UCjWKaM74-ZjKk2p9mVEsf6Q/videos" target="blank" class="button-default">See More </a>
-        </div>
-      </div><!-- container -->
-    </section><!-- classes -->
-    <!-- Classes End here -->
      
 
   	<!-- Gallery Start here -->

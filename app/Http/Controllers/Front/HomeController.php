@@ -7,6 +7,7 @@ use App\HolidayHomework;
 use App\Http\Controllers\Controller;
 use App\News;
 use App\Slider;
+use App\Video;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -16,8 +17,10 @@ class HomeController extends Controller
         
        $news = News::orderBy('id','desc')->get();
        $sliders = Slider::orderBy('id','desc')->get();
+       $videos = Video::orderBy('id','desc')->get();
+        
 
-        return view('front.index', compact('news','sliders'));
+        return view('front.index', compact('news','sliders','videos'));
     }
 
     public function about()
