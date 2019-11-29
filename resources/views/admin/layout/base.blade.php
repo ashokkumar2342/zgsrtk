@@ -4,9 +4,37 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Zad Global School</title>
-  <!-- Tell the browser to be responsive to screen width -->
+  <title> Best Primary Schools in Rohtak | Best Primary Schools in Haryana | Top Primary Schools in Rohtak | CBSE affiliated schools in Rohtak | Nursery Schools in Rohtak </title>
+    
+  <meta name="title" content="Best Primary Schools in Rohtak, CBSE affiliated schools in Rohtak, Nursery Schools in Rohtak, First Schools in Rohtak, Top Schools in Rohtak">
+    
+    <meta name="description" content="ZAD Education Society has reached the dizzy heights of success, after nurturing thousands of students and helping them to realize their cherished goals. It has become a house hold name through the length and breadth of the country.">
+    
+    <meta name="keywords" content=" Best Primary Schools in Rohtak, CBSE affiliated schools in Rohtak, Best Academic school in Rohtak, Best Public School in Rohtak, Best faculty school in Rohtak, Best Academic school in Rohtak, Top Ranking school in Rohtak, Best International School in Rohtak, Top Schools in Rohtak">
+    
+   
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        
+        
+      <meta name="copyright" content="zadglobalschool.com/" />
+        <meta name="language" content="English" />
+        <meta name="robots" content="index, follow" />
+        <meta name="contact" content="zgsrtk@gmail.com/ ">
+        <meta name="robots" content="NOODP" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="bingbot" content="index, follow" />
+        <meta name="revisit-after" content="daily">
+        <meta name="allow-search" content="yes" />
+         
+        <meta name="geo.placename" content="India">
+        <meta name="geo.region" content="Rohtak">
+       <meta property="og:url" content="http://zadglobalschool.com/" />
+        <meta property="og:image" content="http://zadglobalschool.com/images/logo.png/" />
+     <meta property="og:locale" content="en_US" />
+        <meta property="og:type" content="website" /> 
+        <meta property="og:description" content="ZAD Education Society has reached the dizzy heights of success, after nurturing thousands of students and helping them to realize their cherished goals. It has become a house hold name through the length and breadth of the country." />
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="{{ asset('admin_asset/bootstrap/css/bootstrap.min.css')}}">
   <!-- Font Awesome -->
