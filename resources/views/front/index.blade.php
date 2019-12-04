@@ -7,7 +7,7 @@
    <section class=" container text-center" style="margin-top: 10px;margin-bottom:  10px">
      <div  class="row">
         <a href="{{ route('front.circular') }}" title="Circular">
-       <div  class="col-lg-4 bg-primary"  style="background-color: blue">
+       <div  class="col-lg-4 label-warning" >
       
           
        
@@ -15,15 +15,16 @@
        </div>
         </a>
        <a href="{{ route('student.home') }}" title="Online Pay">
-       <div  class="col-lg-4 bg-info" style="background-color: green">
+       <div  class="col-lg-4 bg-info label-success">
          <h4 style="color:#fff">Pay Online Fee</h4> 
        </div>
        </a>
-       <div  class="col-lg-4 bg-danger"  style="background-color: red">
-         <h4 style="color:#fff">Admission Form</h4> 
+       <a href="{{ route('front.enquiry') }}" title="">
+       <div  class="col-lg-4 label-info">
+         <h4 style="color:#fff">Enquery</h4> 
           
        </div>
-       
+       </a>
      </div>
      
    </section>
@@ -151,13 +152,13 @@
         <!-- Classes End here -->
  
   	<!-- About Start here -->
-  	<section class="about about-two padding-10">
+  	<section class="about about-two padding-10" style="padding-top: 30px">
   		<div class="container">
   			<div class="row">
         <div class="col-md-12">
             <div class="about-content">
               
-              <h4 style="font-size: 36px;color: #ffc000;">Welcome To ZAD Global School</h4> 
+              <h4 style="font-size: 36px;color: #e84b3a;">Welcome To ZAD Global School</h4> 
               <img src="{{ asset('images/about/about-2.png') }}" align="right" alt="about image" class="img-responsive" style="height: 150px;">
 
               <p>ZAD Education Society was inaugurated by Hon’ble PADAMSHRI SETH Shrikrishan Das (Ex. Finance Minister, Haryana Govt.) on 18 August 1996</p>

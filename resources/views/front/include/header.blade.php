@@ -7,7 +7,7 @@
         <span style="padding:5px auto;color:#fff">
          <b> Latest News</b> <i class="fa fa-space-shuttle faa-passing animated"></i> </span>  
     </div> 
-    <div class="col-lg-10" style="padding:0px;color:#fff;); font-size:1em; background:rgb(36, 37, 37)"> 
+    <div class="col-lg-10" style="padding:0px;color:#fff;); font-size:1em; background:rgb(69, 86, 86)"> 
           
                  <marquee onmouseover="this.stop();" onmouseout="this.start();">
                           <b>    {{ $notices =App\Notice::find(1)->news }}</b>
@@ -49,7 +49,7 @@
   		<div class="header-top" >
   			<div class="container">
   				<div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3" style="padding-top: 7px;">
               <a class="logo" href="{{ route('front.home') }}"><img src="{{ asset('images/logo.png') }}" alt="logo" class="img-responsive"></a>
             </div>
             <div class="col-md-9">
