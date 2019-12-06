@@ -43,14 +43,14 @@ class OrderSms extends Command
     public function handle()
     {
        
-        if(\Carbon\Carbon::now()->format('H:i') == '08:00'){
-             $students= Student::whereMonth('dob','=',\Carbon\Carbon::today()->month)->whereDay('dob','=',\Carbon\Carbon::today()->day)->get();
-             foreach($students as $student){
-                 Event::fire(new SendSmsEvent($student->mobile_sms,'Dear student, ZAD Global School wish you very happy birthday.'));
-                 Log::info('Dear student, ZAD Global School wish you very happy birthday.'.$student->mobile_sms);
-                
-             }
+        
+         $students= Student::whereMonth('dob','=',\Carbon\Carbon::today()->month)->whereDay('dob','=',\Carbon\Carbon::today()->day)->get();
+         foreach($students as $student){
+             Event::fire(new SendSmsEvent($student->mobile_sms,'Dear student, ZAD Global School wish you very happy birthday.'));
+             Log::info('Dear student, ZAD Global School wish you very happy birthday.'.$student->mobile_sms);
+            
          }
+      
          if(\Carbon\Carbon::now()->format('H:i') == '13:00'){
               $students= StudentAttendance::where('attendance_type_id',2)->whereDate('created_at',date('Y-m-d'))->get();
               foreach($students as $student){
