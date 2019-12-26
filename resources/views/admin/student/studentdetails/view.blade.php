@@ -152,9 +152,17 @@
               <td>{{ $studentFee->received_fee }}</td>
               <td>{{ $studentFee->balance_fee }}</td>
               <td>
-                <a class="btn btn-warning btn-xs" href="{{ route('admin.student.fee.edit',$studentFee->id) }}"><i class="fa fa-pencil"></i></a>
-                <a class="btn btn-danger btn-xs" title="Fee Delete" onclick="return confirm('Are you sure to Fee delete.')" href="{{ route('admin.student.fee.delete',$studentFee->id) }}"><i class="fa fa-trash"></i></a>
-                 <a class="btn btn-info btn-xs" href="{{ route('admin.student.receipt.fee',$studentFee->id) }}"><i class="fa fa-file-o"></i></a>
+                
+                <a class="btn btn-info btn-xs" href="{{ route('admin.student.receipt.fee',$studentFee->id) }}"><i class="fa fa-file-o"></i></a>
+                @php
+                  $id =Auth::guard('admin')->user()->id;
+                @endphp
+                @if ($id==3)
+                   <a class="btn btn-danger btn-xs" title="Fee Delete" onclick="return confirm('Are you sure to Fee delete.')" href="{{ route('admin.student.fee.delete',$studentFee->id) }}"><i class="fa fa-trash"></i></a>
+                    <a class="btn btn-warning btn-xs" href="{{ route('admin.student.fee.edit',$studentFee->id) }}"><i class="fa fa-pencil"></i></a>
+                 
+                @endif
+               
                </td>
              </tr>
             @endforeach
