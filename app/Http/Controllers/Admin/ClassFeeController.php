@@ -18,7 +18,7 @@ class ClassFeeController extends Controller
     public function index()
     {
         $centers = Center::where('status',1)->get();
-        $classfees =  ClassFee::where('session_id',3)->get();
+        $classfees =  ClassFee::where('session_id','>=',3)->get();
         $classes = array_pluck(ClassType::get(['id','alias'])->toArray(),'alias', 'id');
         $sessions = array_pluck(SessionDate::get(['id','date'])->toArray(),'date', 'id');
         return view('admin.account.classfee.list',compact('centers','classes','classfees','sessions'));
@@ -34,7 +34,7 @@ class ClassFeeController extends Controller
     public function omax()
     {
          $centers = Center::where('status',1)->get();
-        $classfees =  ClassFee::where('center_id',3)->where('session_id',3)->get();
+        $classfees =  ClassFee::where('center_id',3)->where('session_id','>=',3)->get();
         $classes = array_pluck(ClassType::get(['id','alias'])->toArray(),'alias', 'id');
         $sessions = array_pluck(SessionDate::get(['id','date'])->toArray(),'date', 'id');
         return view('admin.account.classfee.omax',compact('centers','classes','classfees','sessions'));
