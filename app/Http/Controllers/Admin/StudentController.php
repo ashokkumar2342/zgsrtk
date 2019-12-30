@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Center;
+use App\ClassFee;
 use App\ClassType;
 use App\DiscountType;
 use App\Http\Controllers\Controller;
@@ -353,7 +354,9 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         $paymentmodes = PaymentMode::get();
-        return view('admin.student.studentdetails.view',compact('student','paymentmodes'));
+        $classFee = ClassFee::where(['center_id'=>$student->center_id,'session_id'=>$student->session_id,'class_id'=>$student->class_id])->first();
+        $sibling_discount =$classFee->discount;
+        return view('admin.student.studentdetails.view',compact('student','paymentmodes','sibling_discount'));
     }
     public function excelData(){
 

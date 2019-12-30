@@ -124,6 +124,13 @@
                         <p class="text-danger">{{ $errors->first('other_charges') }}</p>
                         </div>
                      </div>
+                     <div class="col-lg-4">                         
+                       <div class="form-group">
+                        {{ Form::label('discount','Sibling Discount (In Rs.)',['class'=>' control-label']) }}
+                        {{ Form::number('discount',@$classFee->discount,['class'=>'form-control required']) }}
+                        <p class="text-danger">{{ $errors->first('discount') }}</p>
+                        </div>
+                     </div>
 
                     <div class="row">
                         <div class="col-md-12 text-right">

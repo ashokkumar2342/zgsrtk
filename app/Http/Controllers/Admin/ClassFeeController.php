@@ -79,6 +79,7 @@ class ClassFeeController extends Controller
         $classfee->smart_fee = $request->smart_class_fees;
         $classfee->tution_fee = $request->tuition_fees;
         $classfee->other_fee = $request->other_charges;
+        $classfee->discount = $request->discount;
         $classfee->total_fee = ($request->admission_fees+$request->admission_form_fees+$request->registration_fees+$request->annual_harges+$request->bus_fees+$request->caution_money+$request->activity_charges+$request->smart_class_fees+$request->tuition_fees+$request->other_charges);
 
         if ($classfee->save()) {
@@ -153,6 +154,7 @@ class ClassFeeController extends Controller
         $classFee->smart_fee = $request->smart_class_fees;
         $classFee->tution_fee = $request->tuition_fees;
         $classFee->other_fee = $request->other_charges;
+        $classFee->discount = $request->discount;
         $classFee->total_fee = ($request->admission_fees+$request->admission_form_fees+$request->registration_fees+$request->annual_harges+$request->bus_fees+$request->caution_money+$request->activity_charges+$request->smart_class_fees+$request->tuition_fees+$request->other_charges);
 
         if ($classFee->save()) {
