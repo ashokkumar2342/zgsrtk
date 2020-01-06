@@ -7,7 +7,10 @@ Route::group(['middleware' => 'admin'], function() {
     Route::get('dashboard', 'DashboardController@index')->name('admin.dashboard');
     Route::group(['prefix' => 'student'], function() {
         Route::get('add', 'StudentController@create')->name('admin.student.form');
+        Route::get('student-view', 'StudentController@studentVIew')->name('admin.student.view.class.wise');
+        Route::post('student-search', 'StudentController@studentSearch')->name('admin.student.show.search');
         Route::get('{student}/view', 'StudentController@show')->name('admin.student.view');
+        Route::get('hudashow/{id}', 'StudentController@hudashow')->name('student.huda.all');
         Route::get('{student}/edit', 'StudentController@edit')->name('admin.student.edit');
         Route::get('{student}/delete', 'StudentController@destroy')->name('admin.student.delete');
         Route::get('{student}/profileedit', 'StudentController@profileedit')->name('admin.student.profileedit');

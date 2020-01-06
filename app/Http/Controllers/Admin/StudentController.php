@@ -35,21 +35,47 @@ class StudentController extends Controller
     }
       public function huda()
     {        
-        $students = Student::where('center_id',1)->get();
-        return view('admin.student.studentdetails.huda',compact('students'));
+        // $students = Student::where('center_id',1)->get();
+        return view('admin.student.studentdetails.huda');
+    } 
+      public function hudashow($id)
+    {        
+        $students = Student::where('center_id',$id)->get();
+        return view('admin.student.studentdetails.student_table',compact('students'));
+    }   
+    public function studentVIew()
+    {        
+       $centers = Center::where('status',1)->get();
+       $paymenttypes = array_pluck(PaymentType::get(['id','name'])->toArray(),'name', 'id');
+       $classes = array_pluck(ClassType::get(['id','alias'])->toArray(),'alias', 'id');
+       $discounts = array_pluck(DiscountType::get(['id','name'])->toArray(),'name', 'id');
+       $sessions = array_pluck(SessionDate::get(['id','date'])->toArray(),'date', 'id');
+       $routes = array_pluck(TransportRoute::get(['id','name'])->toArray(),'name', 'id');
+
+       return view('admin.student.studentdetails.student_view',compact('classes','routes','sessions','centers','paymenttypes','discounts'));
+        
+    }
+     public function studentSearch(Request $request)
+    {
+
+        $students = Student::where(['center_id'=>$request->center,'session_id'=>$request->session,'class_id'=>$request->class,'section_id'=>$request->section])->get();
+        $response =array();
+        $response['status'] =1;
+        $response['data']= view('admin.student.studentdetails.student_table',compact('students'))->render();
+        return $response;
+         
+          
+      
     }
     public function jind()
     {
-        $students = Student::where('center_id',2)->get();
          
-        return view('admin.student.studentdetails.jind',compact('students'));
+        return view('admin.student.studentdetails.jind');
 
     }
      public function omax()
-    {
-        $students = Student::where('center_id',3)->get();
-         
-        return view('admin.student.studentdetails.omax',compact('students'));
+    {  
+        return view('admin.student.studentdetails.omax');
 
     }
 
