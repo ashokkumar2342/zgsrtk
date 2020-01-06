@@ -129,6 +129,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
+                          <li><a href="{{ route('admin.student.view.class.wise') }}"><i class="fa fa-circle-o"></i> View Student</a></li>
                             <li><a href="{{ route('admin.student.form') }}"><i class="fa fa-circle-o"></i> Add Student</a></li>
                             
                             <li><a href="{{ route('admin.student.huda') }}"><i class="fa fa-circle-o"></i> Huda Complex</a></li>
