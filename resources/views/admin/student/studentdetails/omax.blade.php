@@ -12,7 +12,7 @@
                 <li><span ><a href="{{ route('admin.student.excel') }}" class="btn btn-warning btn-sm" >Export</a></span></li>
             
             </div>
-            <button type="hidden" hidden id="btn_show" data-table-without-pagination="dataTable"  onclick="callAjax(this,'{{ route('student.huda.all',3) }}','result_student')">show</button>
+            <button type="hidden" hidden id="btn_show" data-table="dataTable"  onclick="callAjax(this,'{{ route('student.huda.all',3) }}','result_student')">show</button>
             <!-- /.box-header -->
             <div class="box-body" id="result_student">
               
