@@ -10,9 +10,26 @@
     <title>ZAD Global School Rohtak | Best School in rohtak | School in rohtak </title>
     {{-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script> --}}
     <meta name="Author" content="www.zadglobalschool.com"/>
-        <meta name="keywords" content="ZADGlobal School Rohtak | zgs | zad Rohtak | Best School in Rohtak | School in Rohtak" />
+        <meta name="keywords" content="ZAD Global School Rohtak | zgs | zad Rohtak | Best School in Rohtak | School in Rohtak" />
         <meta name="description" content="ZAD Education Society has reached the dizzy heights of success, after nurturing thousands of students and helping them to realize their cherished goals. It has become a house hold name through the length and breadth of the country." />
-
+    <meta name="copyright" content="zadglobalschool.com" />
+        <meta name="language" content="English" />
+        <meta name="robots" content="index, follow" />
+        <meta name="contact" content="zgsrtk1@gmail.com/ ">
+        <meta name="robots" content="NOODP" />
+        <meta name="googlebot" content="index, follow" />
+        <meta name="bingbot" content="index, follow" />
+        <meta name="revisit-after" content="daily">
+        <meta name="allow-search" content="yes" />
+           
+        <meta name="geo.placename" content="India">
+        <meta name="geo.region" content="Rohtak">
+         <meta property="og:url" content="http://zadglobalschool.com/" />
+          <meta property="og:image" content="http://zadglobalschool.com/images/logo.png" />
+     <meta property="og:locale" content="en_US" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Best School In Rohtak" />
+        <meta property="og:description" content="ZAD Education Society has reached the dizzy heights of success, after nurturing thousands of students and helping them to realize their cherished goals. It has become a house hold name through the length and breadth of the country" />
     <link href="{{ asset('images/favicon.png') }}" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
 
     <!-- Google fonts -->
