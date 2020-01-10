@@ -30,6 +30,7 @@
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Best School In Rohtak" />
         <meta property="og:description" content="ZAD Education Society has reached the dizzy heights of success, after nurturing thousands of students and helping them to realize their cherished goals. It has become a house hold name through the length and breadth of the country" />
+    <link rel="icon" type="image/ico" href="{{ asset('images/favicon.png') }}" size="16x16">
     <link href="{{ asset('images/favicon.png') }}" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
 
     <!-- Google fonts -->
