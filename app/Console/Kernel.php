@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         'App\Console\Commands\OrderSms',
         'App\Console\Commands\HomeworkSend',
+        'App\Console\Commands\DbBackup',
     ];
 
     /**
@@ -25,7 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('order:send')->dailyAt('08:00');;
+        $schedule->command('order:send')->dailyAt('08:00');
+        $schedule->command('db:backup')->daily();
     }
 
     /**
