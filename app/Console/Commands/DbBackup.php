@@ -36,7 +36,7 @@ class DbBackup extends Command
                     config('database.connections.mysql.username'),
                     config('database.connections.mysql.password'),
                     config('database.connections.mysql.database'),
-                    storage_path('app/backup-' . Carbon::now()->format('Y-m-d') . '.sql')
+                    storage_path('app/backup-' . Carbon::now()->format('Y-m-d') . '.gz')
                 ));
     }
 
@@ -55,10 +55,11 @@ class DbBackup extends Command
         try {
             $this->process->mustRun();
             $this->info('The backup has been proceed successfully.');
+            $this->sendEmail(storage_path('app/backup-' . Carbon::now()->format('Y-m-d') . '.gz'));
         } catch (ProcessFailedException $exception) {
             $this->error('The backup process has been failed.');
         }
-            // $this->sendEmail(storage_path() . "/app/" . $filename);
+            
     }
 
     public function sendEmail($path){
