@@ -58,7 +58,7 @@ class DbBackup extends Command
         } catch (ProcessFailedException $exception) {
             $this->error('The backup process has been failed.');
         }
-            $this->sendEmail(storage_path() . "/app/" . $filename);
+            // $this->sendEmail(storage_path() . "/app/" . $filename);
     }
 
     public function sendEmail($path){
