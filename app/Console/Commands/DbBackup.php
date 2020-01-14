@@ -32,7 +32,7 @@ class DbBackup extends Command
     {
         parent::__construct();
         $this->process = new Process(sprintf(
-                    'mysqldump -u%s -p%s %s gzip > %s',
+                    'mysqldump -u%s -p%s %s | gzip > %s',
                     config('database.connections.mysql.username'),
                     config('database.connections.mysql.password'),
                     config('database.connections.mysql.database'),
