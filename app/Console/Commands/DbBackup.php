@@ -55,10 +55,10 @@ class DbBackup extends Command
         try {
             $this->process->mustRun();
             $this->info('The backup has been proceed successfully.');
-            if ($process->isSuccessful())
-            {
-                $this->sendEmail(storage_path('app/backup-'.Carbon::now()->format('Y-m-d').'.gz'));
-            }
+            // if ($process->isSuccessful())
+            // {
+            //     $this->sendEmail(storage_path('app/backup-'.Carbon::now()->format('Y-m-d').'.gz'));
+            // }
         } catch (ProcessFailedException $exception) {
             $this->error('The backup process has been failed.');
         }
