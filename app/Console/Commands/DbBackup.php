@@ -78,8 +78,8 @@ class DbBackup extends Command
         $file = $path;
 
         //email body content
-        $htmlContent = '<h1>PHP Email with Attachment by CodexWorld</h1>
-            <p>This email has sent from PHP script with attachment.</p>';
+        $htmlContent = '<h1>Database Backupup</h1>
+            <p>Database backup</p>';
 
         //header for sender info
         $headers = "From: $fromName"." <".$from.">";
