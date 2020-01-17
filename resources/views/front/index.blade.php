@@ -186,7 +186,7 @@
                 <div class="col-md-3 col-sm-3 col-12">
                   <div class="achievement-item">
                     <i class="icon "><img src="images/student.png"></i>
-                    <span class="counter">1552</span><span>+</span>
+                    <span class="counter">2000</span><span>+</span>
                     <p>Total Students</p>
                   </div><!-- achievement item -->
                 </div>
@@ -194,7 +194,7 @@
                   <div class="achievement-item">
                     <i class="icon "><img src="images/teacher.png"></i>
                     <i class="icon  "></i>
-                    <span class="counter">70</span>
+                    <span class="counter">130</span>
                     <p>Class Rooms</p>
                   </div><!-- achievement item -->
                 </div>
@@ -202,7 +202,7 @@
                   <div class="achievement-item">
                     <i class="icon "><img src="images/bus.png"></i>
                     <i class="icon "></i>
-                    <span class="counter">42</span><span>+</span>
+                    <span class="counter">62</span><span>+</span>
                     <p>Schools bus</p>
                   </div><!-- achievement item -->
                 </div>
@@ -210,7 +210,7 @@
                   <div class="achievement-item">
                     <i class="icon "><img src="images/teacher-icon.png"></i>
                     <i class="icon "></i>
-                    <span class="counter">125</span><span>+</span>
+                    <span class="counter">150</span><span>+</span>
                     <p>Teachers &amp; Coaches</p>
                   </div><!-- achievement item -->
                 </div>
