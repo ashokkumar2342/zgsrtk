@@ -159,7 +159,7 @@
                 @endphp
                 @if ($id==3)
                    <a class="btn btn-danger btn-xs" title="Fee Delete" onclick="return confirm('Are you sure to Fee delete.')" href="{{ route('admin.student.fee.delete',$studentFee->id) }}"><i class="fa fa-trash"></i></a>
-                    @elseif($studentFee->created_at >=\Carbon\Carbon::now()->subMinutes(5)->toDateTimeString() || $id==3) 
+                    @elseif($studentFee->created_at >=\Carbon\Carbon::now()->subMinutes(45)->toDateTimeString() || $id==3) 
                     <a class="btn btn-warning btn-xs" href="{{ route('admin.student.fee.edit',$studentFee->id) }}"><i class="fa fa-pencil"></i></a>
                  
                 @endif
