@@ -15,6 +15,8 @@ Route::group(['middleware' => 'admin'], function() {
         Route::get('{student}/delete', 'StudentController@destroy')->name('admin.student.delete');
         Route::get('{student}/profileedit', 'StudentController@profileedit')->name('admin.student.profileedit');
         Route::get('{student}/totalfeeedit', 'StudentController@totalfeeedit')->name('admin.student.totalfeeedit');
+        Route::get('due-fee/{id}', 'StudentController@dueFee')->name('admin.student.due.fee');
+        Route::post('due-fee-store/{id}', 'StudentController@dueFeeStore')->name('admin.student.due.fee.store');
         Route::post('{student}/totalfeeupdate', 'StudentController@totalfeeupdate')->name('admin.student.totalfeeupdate');
         Route::post('add', 'StudentController@store')->name('admin.student.post');
          Route::post('{student}/update', 'StudentController@update')->name('admin.student.update');
@@ -32,6 +34,7 @@ Route::group(['middleware' => 'admin'], function() {
         Route::group(['prefix' => 'receipt'], function() {
             Route::get('admission/{student}', 'StudentController@admissionReceipt')->name('admin.student.receipt.admission');
             Route::get('fee/{studentFee}', 'StudentController@feeReceipt')->name('admin.student.receipt.fee');
+            Route::get('due-fee/{studentFee}', 'StudentController@dueFeeReceipt')->name('admin.student.due.fee.receipt');
         });
         Route::group(['prefix' => 'fee'], function() {
             Route::post('pay', 'StudentController@payFee')->name('admin.student.fee.paid');

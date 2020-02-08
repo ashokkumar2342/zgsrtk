@@ -6,6 +6,7 @@ use App\Center;
 use App\ClassFee;
 use App\ClassType;
 use App\DiscountType;
+use App\DueFee;
 use App\Http\Controllers\Controller;
 use App\OnlinePaymentHistory;
 use App\PaymentMode;
@@ -678,6 +679,11 @@ class StudentController extends Controller
     {
         return view('admin.student.studentdetails.feeReceipt',compact('studentFee'));
     }
+     public function dueFeeReceipt(StudentFee $studentFee)
+    {
+        $DueFee=DueFee::where('student_id',$studentFee->student_id)->where('student_fee_id',$studentFee->id)->first();
+        return view('admin.student.studentdetails.dueFeeReceipt',compact('studentFee','DueFee'));
+    }
      public function studentClassByFeeForm()
     {
         $centers = Center::where('status',1)->get();
@@ -812,6 +818,34 @@ class StudentController extends Controller
             $response['status'] = 1;
             return $response;
 
+      }  
+
+      public function dueFee(Request $request,$id)       
+      {   
+         $fee =StudentFee::find($id);      
+         $response= array();                       
+         $response['status']= 1;                       
+        return view('admin.student.studentdetails.due_fee',compact('fee'))->render();
+          
+      }
+      public function dueFeeStore(Request $request,$id)       
+      {   
+         $fee =StudentFee::find($id);  
+         $fee->balance_fee = $fee->balance_fee-$request->due_fee;    
+         $fee->received_fee = $fee->received_fee+$request->due_fee;    
+         $fee->save();
+
+         $DueFee =DueFee::firstOrNew(['student_id'=>$request->student_id,'student_fee_id'=>$id]);  
+         $DueFee->student_id = $request->student_id;    
+         $DueFee->student_fee_id = $id;    
+         $DueFee->due_fee = $request->due_fee;    
+         $DueFee->save();
+
+         $response= array();                       
+         $response['status']= 1;                       
+         $response['msg']= 'Due Fee Updated Successfully';                       
+         
+         return $response;
       }  
 
 

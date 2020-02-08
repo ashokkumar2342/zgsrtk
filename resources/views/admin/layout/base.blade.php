@@ -377,5 +377,6 @@
     <script src={!! asset('admin_asset/dist/js/customscript.js?ver=1') !!}></script>
       <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     @stack('scripts')
+    @include('admin.include.model')
 </body>
 </html>

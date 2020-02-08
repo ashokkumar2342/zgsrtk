@@ -152,8 +152,19 @@
               <td>{{ $studentFee->received_fee }}</td>
               <td>{{ $studentFee->balance_fee }}</td>
               <td>
-                
+                @if ($studentFee->balance_fee !=0)
+                <button class="btn btn-primary btn-xs" onclick="callPopupLarge(this,'{{ route('admin.student.due.fee',$studentFee->id) }}')">Due Fee</button>
+                @endif
+                  
+                 @php
+                    $DueFee=App\DueFee::where('student_id',$studentFee->student_id)->where('student_fee_id',$studentFee->id)->first();
+                 @endphp
+                 @if (!empty($DueFee))
+                   <a class="btn btn-info btn-xs" href="{{ route('admin.student.due.fee.receipt',$studentFee->id) }}">Due Fee Receipt</a>
+                 @endif                
+
                 <a class="btn btn-info btn-xs" href="{{ route('admin.student.receipt.fee',$studentFee->id) }}"><i class="fa fa-file-o"></i></a>
+
                 @php
                   $id =Auth::guard('admin')->user()->id;
                 @endphp
