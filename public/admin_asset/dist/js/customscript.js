@@ -29,6 +29,10 @@ function callAjax(obj,url,divId,callback){
 									
 				$("#"+obj.getAttribute('data-table')).DataTable({
 					'iDisplayLength': 10,
+					dom: 'Bfrtip',
+						buttons: [
+							'copy', 'csv', 'excel', 'pdf', 'print'
+						]
 				});
 				
 				  // Add event listener for opening and closing details

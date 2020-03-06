@@ -9,7 +9,7 @@
               <ol class="breadcrumb text-right">
               <li><span ><a href="{{ route('admin.student.form') }}" class="btn btn-info btn-sm" >Add Student</a></span></li>
               
-                <li><span ><a href="{{ route('admin.student.excel') }}" class="btn btn-warning btn-sm" >Export</a></span></li>
+                {{-- <li><span ><a href="{{ route('admin.student.excel') }}" class="btn btn-warning btn-sm" >Export</a></span></li> --}}
             
             </div>
             <button type="hidden" hidden id="btn_show" data-table="dataTable"  onclick="callAjax(this,'{{ route('student.huda.all',1) }}','result_student')">show</button>
