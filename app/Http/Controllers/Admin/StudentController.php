@@ -791,6 +791,66 @@ class StudentController extends Controller
            $response['status'] = 1;
            return $response;
 
+     }
+     public function duefeeReportShow(Request $request)       
+     {  
+
+       $studentsId=Student::where('center_id',$request->center)->where('session_id',$request->session)->pluck('id')->toArray(); 
+       $dueStudentId=array();
+       $stId=array();
+       foreach ($studentsId as $id) {
+        $student = Student::find($id);
+          $count =StudentFee::Where('student_id', $id)
+          ->Where('session_id', $request->session)   
+          ->count();
+          if ($request->month == 'Apr - Jun') {
+             if ($student->payment_type_id==1) {
+                if (1 > $count) {
+                  $stId[]=$id;
+               }
+             }
+             else if (1 > $count) {
+               $stId[]=$id;
+             }
+          } 
+          else if ($request->month == 'Jul - Sep') {
+             if ($student->payment_type_id==1) {
+                if (1 > $count) {
+                  $stId[]=$id;
+               }
+             }
+             else if (2 > $count) {
+               $stId[]=$id;
+             }
+          } else if ($request->month == 'Oct - Dec') {
+             if ($student->payment_type_id==1) {
+               if (1 > $count) {
+                 $stId[]=$id;
+              }
+            }
+            else if(3 > $count) {
+              $stId[]=$id;
+            }
+          }else if ($request->month == 'Jan - Mar') {
+             if ($student->payment_type_id==1) {
+                if (1 > $count) {
+                  $stId[]=$id;
+               }
+             }
+             else if(4 > $count) {
+               $stId[]=$id;
+             }
+          }
+            
+       }
+        
+       $students = Student::whereIn('id',$stId)->get();
+         
+       $response = array(); 
+       $response['data']= view('admin.student.studentdetails.student_table',compact('students','center_id'))->render();
+           $response['status'] = 1;
+           return $response;
+
      }    
 
      public function onlinePayFeeReport(Request $request)       
