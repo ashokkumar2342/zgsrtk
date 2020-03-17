@@ -316,7 +316,7 @@
                                         <span id="lblSiblingStaff" style="font-family:Arial;font-size:Small;"></span>
                                     </td>
                                 </tr>
-                                <!-- @if ($studentFee->discountType->id!=1) -->
+                              
                                   <tr>
                                       <td align="Right" style="font-weight: bold; font-size: small;">
                                           <span id="lblSSDiscount2" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;"> {{ $studentFee->discountType->name or '' }} Discount (-)</span>
@@ -325,7 +325,7 @@
                                           <span id="lblOtherDiscount" style="font-family:Arial;font-size:Small;">{{$studentFee->discount}}</span>
                                       </td>
                                   </tr>   
-                                <!-- @endif -->
+                     
                               
                                 <tr>
                                     <td align="Right" style="font-weight: bold; font-size: small;">
@@ -651,7 +651,7 @@
                                         <span id="lblSiblingStaff" style="font-family:Arial;font-size:Small;"></span>
                                     </td>
                                 </tr>
-                              <!-- @if ($studentFee->discountType->id!=1) -->
+                             
                                 <tr>
                                     <td align="Right" style="font-weight: bold; font-size: small;">
                                         <span id="lblSSDiscount2" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;"> {{ $studentFee->discountType->name or '' }} Discount (-)</span>
@@ -660,7 +660,7 @@
                                         <span id="lblOtherDiscount" style="font-family:Arial;font-size:Small;">{{$studentFee->discount}}</span>
                                     </td>
                                 </tr>   
-                              <!-- @endif -->
+                             
                                  <tr>
                                     <td align="Right" style="font-weight: bold; font-size: small;">
                                         <span id="lblLessLbl" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Current Balance </span>
