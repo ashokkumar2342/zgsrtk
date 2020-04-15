@@ -312,6 +312,7 @@ Route::group(['middleware' => 'admin'], function() {
          Route::post('promote-list', 'PromoteController@promoteList')->name('admin.promote.student.list');
          Route::post('student-list2', 'PromoteController@studentList2')->name('admin.promote.student2');
          Route::get('search', 'PromoteController@search')->name('admin.promote.search'); 
+         Route::get('fee-update/{center_id}', 'PromoteController@feeUpdate')->name('admin.feeupdate'); 
      });
            //------------------------ Transfer-------------------------------------------
      Route::group(['prefix' => 'transfer'], function() {         

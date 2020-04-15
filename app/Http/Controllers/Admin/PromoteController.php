@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Section;
 use App\Center;
-use App\SectionType;
+use App\ClassFee;
 use App\ClassType;
 use App\DiscountType;
 use App\Http\Controllers\Controller;
 use App\PaymentType;
- 
+use App\Section;
+use App\SectionType;
 use App\SessionDate;
 use App\Student;
 use App\TransportRoute;
@@ -126,10 +126,30 @@ class PromoteController extends Controller
 
    
     }
-    public function create()
+    
+    public function feeUpdate($center_id)
     {
-        //
+        $date = date('Y-m-d');
+        $halfYear=date('Y-m-d',strtotime($date ."-150 days"));
+        $students = Student::where('center_id',$center_id)->where('created_at', '<=', $halfYear.' 00:00:00')->get();
+        foreach ($students as $student) {
+            $st=Student::find($student->id);
+            
+            $classfees=ClassFee::where(['center_id'=>$st->center_id,'session_id'=>$st->session_id,'class_id'=>$st->class_id])->first();
+            $st->annual_charge=$classfees->annual_fee;
+            $st->caution_money=$classfees->caution_fee;
+            $st->activity_charge=$classfees->activity_charge*4;
+            $st->smart_class_fee=$classfees->smart_fee*4;
+            $st->tution_fee=$classfees->tution_fee*4;
+            $st->sms_charge=$classfees->other_fee*4;
+            if ($st->transport_id !=null) {
+               $st->transport_fee=$classfees->bus_fee*4;  
+            }            
+            $st->save();
+        }
+        return 'success';
     }
+
 
     /**
      * Store a newly created resource in storage.
