@@ -136,16 +136,28 @@ class PromoteController extends Controller
             $st=Student::find($student->id);
             
             $classfees=ClassFee::where(['center_id'=>$st->center_id,'session_id'=>$st->session_id,'class_id'=>$st->class_id])->first();
+
+            $bus_fee =0;
+            
+            if ($st->transport_id !=null) {
+                $bus_fee=$classfees->bus_fee*4; 
+             } 
+             
+
             $st->annual_charge=$classfees->annual_fee;
             $st->caution_money=$classfees->caution_fee;
             $st->activity_charge=$classfees->activity_charge*4;
             $st->smart_class_fee=$classfees->smart_fee*4;
             $st->tution_fee=$classfees->tution_fee*4;
-            $st->sms_charge=$classfees->other_fee*4;
-            if ($st->transport_id !=null) {
-               $st->transport_fee=$classfees->bus_fee*4;  
-            }            
-            $st->save();
+            $st->sms_charge=$classfees->other_fee*4; 
+            $st->transport_fee=$bus_fee;  
+            $st->totalFee=  $classfees->annual_fee + $classfees->caution_fee + ($classfees->activity_charge*4) + ($classfees->smart_fee*4) + ($classfees->tution_fee*4) + ($classfees->other_fee*4)              
+                 + $bus_fee;                   
+            $st->firsttime_fee = $classfees->annual_fee ;
+
+            $st->installment_fee =  $classfees->caution_fee + ($classfees->activity_charge*4) + ($classfees->smart_fee*4) + ($classfees->tution_fee*4) + ($classfees->other_fee*4)+$bus_fee;      
+          $st->save();
+             
         }
         return 'success';
     }
