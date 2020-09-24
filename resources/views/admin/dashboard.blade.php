@@ -29,7 +29,7 @@
 
           <input type=""   readonly="" value="{{ $curl_scraped_page }}" name=""> --}}
            @php
-             $url = "http://smsdealnow.com/api/balance.php?usr=516001&key=010Av2NN20YRxgyh6z4KMf01owU8Ry";
+             $url = "http://smsdealnow.com/api/balance.php?usr=516554&key=0106kFu20T2n5BY2QmHX7DU3H2mXRD";
              $ch = curl_init($url);
              curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
              $curl_scraped_page = curl_exec($ch);
