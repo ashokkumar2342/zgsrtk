@@ -178,8 +178,12 @@ class SmsController extends Controller
 
     public function smsSend(Request $request){    
         $mobile = $request->mobile;
-        $message = $request->message;         
-        Event::fire(new SendSmsEvent($mobile,$message));
+        $mobiles=explode(',', $mobile);
+        $message = $request->message;      
+        foreach ($mobiles as $mobile) {
+            Event::fire(new SendSmsEvent($mobile,$message));   
+        }   
+       
    
     return redirect()->back()->with(['class'=>'success','message'=>'sms send successfully ...']);
     }  
