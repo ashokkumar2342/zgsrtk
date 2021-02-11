@@ -74,7 +74,7 @@ class SendSms
 
 
         $msg=urlencode($event->message); 
-        $url = "http://smsdealnow.com/api/pushsms.php?usr=516554&key=0106kFu20T2n5BY2QmHX7DU3H2mXRD&sndr=GLOBLE&ph=$event->mobile&text=$msg&rpt=1";
+        $url = "http://smsdealnow.com/api/pushsms.php?usr=516554&key=0106kFu20T2n5BY2QmHX7DU3H2mXRD&sndr=ITSIND&ph=$event->mobile&text=$msg&rpt=1";
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $curl_scraped_page = curl_exec($ch);
