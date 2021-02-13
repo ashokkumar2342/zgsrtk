@@ -21,7 +21,7 @@
        </a>
        <a href="{{ route('front.enquiry') }}" title="">
        <div  class="col-lg-4 label-info">
-         <h4 style="color:#fff">Inquiry</h4> 
+         <h4 style="color:#fff">Enquiry</h4> 
           
        </div>
        </a>
