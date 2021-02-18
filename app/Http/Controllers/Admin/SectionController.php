@@ -76,7 +76,7 @@ class SectionController extends Controller
                         <p class="text-danger"></p>
                         </div>
                      </div>
-                     <div class="col-lg-1">                         
+                     <div class="col-lg-2">                         
                        <div class="form-group">
                         <label for="pay_type" class=" control-label">Type</label>
                          <select name="meal_pay_time" class="form-control">
@@ -88,7 +88,7 @@ class SectionController extends Controller
                         </div>
                      </div>
                      
-                     <div class="col-lg-3">                         
+                     <div class="col-lg-2">                         
                        <div class="form-group">
                         <label for="activity_charges" class=" control-label">Activity Charges (In Rs.)</label>
                         <input class="form-control required classfee" name="activity_charges"  value="'.($classFee->activity_charge*4).'" type="number" id="activity_charges">
@@ -97,30 +97,37 @@ class SectionController extends Controller
                      </div>
                      <div class="col-lg-3">                         
                        <div class="form-group">
-                        <label for="smart_class_fees" class=" control-label">Smart Class Fees (In Rs.)</label>
+                        <label for="smart_class_fees" class=" control-label">Computer Fees (In Rs.)</label>
                         <input class="form-control required classfee"  value="'.($classFee->smart_fee*4).'" name="smart_class_fees" type="number" id="smart_class_fees">
+                        <p class="text-danger"></p>
+                        </div>
+                     </div>
+                     <div class="col-lg-3">                         
+                       <div class="form-group">
+                        <label for="exam_fees" class=" control-label">Exam Fees (In Rs.)</label>
+                        <input class="form-control required classfee"  value="'.($classFee->exam_fees*4).'" name="exam_fees" type="number" id="exam_fees">
                         <p class="text-danger"></p>
                         </div>
                      </div>
                      <div class="col-lg-2">                         
                        <div class="form-group">
                         <label for="tution_fees" class=" control-label">Tuition Fees (In Rs.)</label>
-                        <input class="form-control required classfee"  value="'.($classFee->tution_fee*4).'" name="tution_fees" type="number" id="tution_fees">
+                        <input class="form-control required classfee"  value="'.($classFee->tution_fee).'" name="tution_fees" type="number" id="tution_fees">
                         <p class="text-danger"></p>
                         </div>
                      </div>
-                     <div class="col-lg-1">                         
+                     <div class="col-lg-2">                         
                        <div class="form-group">
                         <label for="tution_pay_time" class=" control-label">Type</label>
                          <select name="tution_pay_time" class="form-control">
-                            <option value="1">Yearly</option>
-                            <option value="4" selected>Quarterly</option>
+                            <option value="1" selected>Yearly</option>
+                            <option value="4">Quarterly</option>
                              <option value="12">Monthly</option>
                          </select>
                         <p class="text-danger"></p>
                         </div>
                      </div>
-                     <div class="col-lg-3">                         
+                     <div class="col-lg-2">                         
                        <div class="form-group">
                         <label for="sms_charges" class=" control-label">Sms Charges (In Rs.)</label>
                         <input class="form-control required classfee" name="sms_charges" value="'.($classFee->other_fee*4).'" type="number" id="sms_charges">

@@ -105,9 +105,16 @@
                      </div>
                      <div class="col-lg-4">                         
                        <div class="form-group">
-                        {{ Form::label('smart_class_fees','Smart Class Fees (In Rs.)',['class'=>' control-label']) }}
+                        {{ Form::label('smart_class_fees','Computer Fees (In Rs.)',['class'=>' control-label']) }}
                         {{ Form::number('smart_class_fees',@$classFee->smart_fee,['class'=>'form-control required']) }}
                         <p class="text-danger">{{ $errors->first('smart_class_fees') }}</p>
+                        </div>
+                     </div>
+                     <div class="col-lg-4">                         
+                       <div class="form-group">
+                        {{ Form::label('exam_fees','Exam Fees (In Rs.)',['class'=>' control-label']) }}
+                        {{ Form::number('exam_fees',@$classFee->exam_fees,['class'=>'form-control required']) }}
+                        <p class="text-danger">{{ $errors->first('exam_fees') }}</p>
                         </div>
                      </div>
                      <div class="col-lg-4">                         

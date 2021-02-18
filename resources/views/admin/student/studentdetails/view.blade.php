@@ -212,6 +212,7 @@
              
              {!! Form::hidden('activity_charges', ($student->activity_charge/$student->paymentType->times), []) !!}
              {!! Form::hidden('smart_class_fees', ($student->smart_class_fee/$student->paymentType->times), []) !!}
+             {!! Form::hidden('exam_fees', ($student->exam_fees/$student->paymentType->times), []) !!}
              {!! Form::hidden('sms_charges', ($student->sms_charge/$student->paymentType->times), []) !!}
                @if ($student->tution_pay_time==null)
                {!! Form::hidden('tution_fees', ($student->tution_fee/$student->paymentType->times), []) !!}
@@ -228,6 +229,7 @@
             {!! Form::hidden('session_id', $student->session_id, []) !!}
              {!! Form::hidden('activity_charges', ($student->activity_charge/$student->paymentType->times), []) !!}
              {!! Form::hidden('smart_class_fees', ($student->smart_class_fee/$student->paymentType->times), []) !!}
+             {!! Form::hidden('exam_fees', ($student->exam_fees/$student->paymentType->times), []) !!}
              {!! Form::hidden('sms_charges', ($student->sms_charge/$student->paymentType->times), []) !!}
               @if ($student->tution_pay_time==null)
               {!! Form::hidden('tution_fees', ($student->tution_fee/$student->paymentType->times), []) !!}

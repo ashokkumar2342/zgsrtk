@@ -148,14 +148,15 @@ class PromoteController extends Controller
             $st->caution_money=$classfees->caution_fee;
             $st->activity_charge=$classfees->activity_charge*4;
             $st->smart_class_fee=$classfees->smart_fee*4;
-            $st->tution_fee=$classfees->tution_fee*4;
+            $st->exam_fees=$classfees->exam_fees*4;
+            $st->tution_fee=$classfees->tution_fee;
             $st->sms_charge=$classfees->other_fee*4; 
             $st->transport_fee=$bus_fee;  
-            $st->totalFee=  $classfees->annual_fee + $classfees->caution_fee + ($classfees->activity_charge*4) + ($classfees->smart_fee*4) + ($classfees->tution_fee*4) + ($classfees->other_fee*4)              
+            $st->totalFee=  $classfees->annual_fee + $classfees->caution_fee + ($classfees->activity_charge*4) + ($classfees->smart_fee*4) + ($classfees->exam_fees*4) + ($classfees->tution_fee) + ($classfees->other_fee*4)              
                  + $bus_fee;                   
             $st->firsttime_fee = $classfees->annual_fee ;
 
-            $st->installment_fee =  $classfees->caution_fee + ($classfees->activity_charge*4) + ($classfees->smart_fee*4) + ($classfees->tution_fee*4) + ($classfees->other_fee*4)+$bus_fee;      
+            $st->installment_fee =  $classfees->caution_fee + ($classfees->activity_charge*4) + ($classfees->smart_fee*4) + ($classfees->exam_fees*4) + ($classfees->tution_fee) + ($classfees->other_fee*4)+$bus_fee;      
           $st->save();
              
         }

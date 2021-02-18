@@ -179,37 +179,37 @@
                                @if($studentFee->id ==$firstPaymentId)
                                 <tr>
                                     <td align="left" style="font-weight: bold; font-size: small;">
-                                        <span id="lblRegistraionFees" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Registration Fee</span>
+                                        <span id="lblRegistraionFees" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;">Registration Fee + Adm. Form</span>
                                     </td>
                                     <td align="right" style="font-size: small;">
                                         <span id="lblRegFees" style="font-family:Arial;font-size:Small;">{{$studentFee->registration_fee}}</span>
                                     </td>
                                 </tr>
-                                <tr>
+                               {{--  <tr>
                                     <td align="left" style="font-weight: bold; font-size: small;">
                                         <span id="lblAdmissionFee" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Admission Fee</span>
                                     </td>
                                     <td align="right" style="font-size: small;">
                                         <span id="lblAdmissionFees" style="font-family:Arial;font-size:Small;">{{$studentFee->admission_fee}}</span>
                                     </td>
-                                </tr>
-                                <tr>
+                                </tr> --}}
+                               {{--  <tr>
                                     <td align="left" style="font-weight: bold; font-size: small;">
                                         <span id="lblAdmissionFee" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;">Admission Form Fee</span>
                                     </td>
                                     <td align="right" style="font-size: small;">
                                         <span id="lblAdmissionFees" style="font-family:Arial;font-size:Small;">{{$studentFee->admission_form_fee}}</span>
                                     </td>
-                                </tr>
+                                </tr> --}}
                                 <tr>
                                     <td align="left" style="font-weight: bold; font-size: small;">
-                                        <span id="lblDevelopmentCharges" style="display:inline-block;font-family:Arial;font-size:Small;width:220px;text-align: left;">Exam/Assign/Sci Lab/Computer</span>
+                                        <span id="lblDevelopmentCharges" style="display:inline-block;font-family:Arial;font-size:Small;width:220px;text-align: left;">Annual Develoment</span>
                                     </td>
                                     <td align="right" style="font-size: small;">
                                         <span id="lblAnnualCharges" style="font-family:Arial;font-size:Small;">{{$studentFee->annual_charge}}</span>
                                     </td>
                                 </tr>
-                                @endif
+                                
                                 <tr>
                                     <td align="left" style="font-weight: bold; font-size: small;">
                                         
@@ -219,10 +219,18 @@
                                         <span id="lblTutionFees" style="font-family:Arial;font-size:Small;">{{$studentFee->tution_fee}}</span>
                                     </td>
                                 </tr>
-                               
+                               @endif
                                 <tr>
                                     <td align="left" style="font-weight: bold; font-size: small;">
-                                        Smart Class
+                                        Exam Fees
+                                    </td>
+                                    <td align="right" style="font-size: small;">
+                                        <span id="lblSmartClass" style="font-family:Arial;font-size:Small;">{{$studentFee->exam_fees}}</span>
+                                    </td>
+                                </tr> 
+                                <tr>
+                                    <td align="left" style="font-weight: bold; font-size: small;">
+                                        Computer Fees
                                     </td>
                                     <td align="right" style="font-size: small;">
                                         <span id="lblSmartClass" style="font-family:Arial;font-size:Small;">{{$studentFee->smart_class_fee}}</span>
@@ -231,7 +239,7 @@
 
                                 <tr>
                                     <td align="left" style="font-weight: bold; font-size: small;">
-                                        SMS/App Charges
+                                        Smart App + SMS Charges
                                     </td>
                                     <td align="right" style="font-size: small;">
                                         <span id="lblSMS" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: right;">{{$studentFee->sms_charge}}</span>
@@ -514,64 +522,74 @@
                                     </td>
                                 </tr>
                                 @if($studentFee->id ==$firstPaymentId)
-                                <tr>
-                                    <td align="left" style="font-weight: bold; font-size: small;">
-                                        <span id="lblRegistraionFees" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Registration Fee</span>
-                                    </td>
-                                    <td align="right" style="font-size: small;">
-                                        <span id="lblRegFees" style="font-family:Arial;font-size:Small;">{{$studentFee->registration_fee}}</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="left" style="font-weight: bold; font-size: small;">
-                                        <span id="lblAdmissionFee" style="display:inline-block;font-family:Arial;font-size:Small;width:220px;text-align: left;">Admission Fee</span>
-                                    </td>
-                                    <td align="right" style="font-size: small;">
-                                        <span id="lblAdmissionFees" style="font-family:Arial;font-size:Small;">{{$studentFee->admission_fee}}</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="left" style="font-weight: bold; font-size: small;">
-                                        <span id="lblAdmissionFee" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;">Admission Form Fee</span>
-                                    </td>
-                                    <td align="right" style="font-size: small;">
-                                        <span id="lblAdmissionFees" style="font-family:Arial;font-size:Small;">{{$studentFee->admission_form_fee}}</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="left" style="font-weight: bold; font-size: small;">
-                                        <span id="lblDevelopmentCharges" style="display:inline-block;font-family:Arial;font-size:Small;width:220px;text-align: left;">Exam/Assign/Sci Lab/Computer</span>
-                                    </td>
-                                    <td align="right" style="font-size: small;">
-                                        <span id="lblAnnualCharges" style="font-family:Arial;font-size:Small;">{{$studentFee->annual_charge}}</span>
-                                    </td>
-                                </tr>
+                                 <tr>
+                                     <td align="left" style="font-weight: bold; font-size: small;">
+                                         <span id="lblRegistraionFees" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;">Registration Fee + Adm. Form</span>
+                                     </td>
+                                     <td align="right" style="font-size: small;">
+                                         <span id="lblRegFees" style="font-family:Arial;font-size:Small;">{{$studentFee->registration_fee}}</span>
+                                     </td>
+                                 </tr>
+                                {{--  <tr>
+                                     <td align="left" style="font-weight: bold; font-size: small;">
+                                         <span id="lblAdmissionFee" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: left;">Admission Fee</span>
+                                     </td>
+                                     <td align="right" style="font-size: small;">
+                                         <span id="lblAdmissionFees" style="font-family:Arial;font-size:Small;">{{$studentFee->admission_fee}}</span>
+                                     </td>
+                                 </tr> --}}
+                                {{--  <tr>
+                                     <td align="left" style="font-weight: bold; font-size: small;">
+                                         <span id="lblAdmissionFee" style="display:inline-block;font-family:Arial;font-size:Small;text-align: left;">Admission Form Fee</span>
+                                     </td>
+                                     <td align="right" style="font-size: small;">
+                                         <span id="lblAdmissionFees" style="font-family:Arial;font-size:Small;">{{$studentFee->admission_form_fee}}</span>
+                                     </td>
+                                 </tr> --}}
+                                 <tr>
+                                     <td align="left" style="font-weight: bold; font-size: small;">
+                                         <span id="lblDevelopmentCharges" style="display:inline-block;font-family:Arial;font-size:Small;width:220px;text-align: left;">Annual Develoment</span>
+                                     </td>
+                                     <td align="right" style="font-size: small;">
+                                         <span id="lblAnnualCharges" style="font-family:Arial;font-size:Small;">{{$studentFee->annual_charge}}</span>
+                                     </td>
+                                 </tr>
+                                 
+                                 <tr>
+                                     <td align="left" style="font-weight: bold; font-size: small;">
+                                         
+                                         Tuition Fee ({{ $payTypeTution }})
+                                     </td>
+                                     <td align="right" style="font-size: small;">
+                                         <span id="lblTutionFees" style="font-family:Arial;font-size:Small;">{{$studentFee->tution_fee}}</span>
+                                     </td>
+                                 </tr>
                                 @endif
-                                <tr>
-                                    <td align="left" style="font-weight: bold; font-size: small;">
-                                        Tuition Fee ({{ $payTypeTution }})
-                                    </td>
-                                    <td align="right" style="font-size: small;">
-                                        <span id="lblTutionFees" style="font-family:Arial;font-size:Small;">{{$studentFee->tution_fee}}</span>
-                                    </td>
-                                </tr>
-                             
-                                <tr>
-                                    <td align="left" style="font-weight: bold; font-size: small;">
-                                        Smart Class
-                                    </td>
-                                    <td align="right" style="font-size: small;">
-                                        <span id="lblSmartClass" style="font-family:Arial;font-size:Small;">{{$studentFee->smart_class_fee}}</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="left" style="font-weight: bold; font-size: small;">
-                                        SMS/App Charges
-                                    </td>
-                                    <td align="right" style="font-size: small;">
-                                        <span id="lblSMS" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: right;">{{$studentFee->sms_charge}}</span>
-                                    </td>
-                                </tr>
+                                 <tr>
+                                     <td align="left" style="font-weight: bold; font-size: small;">
+                                         Exam Fees
+                                     </td>
+                                     <td align="right" style="font-size: small;">
+                                         <span id="lblSmartClass" style="font-family:Arial;font-size:Small;">{{$studentFee->exam_fees}}</span>
+                                     </td>
+                                 </tr> 
+                                 <tr>
+                                     <td align="left" style="font-weight: bold; font-size: small;">
+                                         Computer Fees
+                                     </td>
+                                     <td align="right" style="font-size: small;">
+                                         <span id="lblSmartClass" style="font-family:Arial;font-size:Small;">{{$studentFee->smart_class_fee}}</span>
+                                     </td>
+                                 </tr>
+
+                                 <tr>
+                                     <td align="left" style="font-weight: bold; font-size: small;">
+                                         Smart App + SMS Charges
+                                     </td>
+                                     <td align="right" style="font-size: small;">
+                                         <span id="lblSMS" style="display:inline-block;font-family:Arial;font-size:Small;width:120px;text-align: right;">{{$studentFee->sms_charge}}</span>
+                                     </td>
+                                 </tr>
                                 <tr>
                                     <td align="left" style="font-weight: bold; font-size: small;">
                                        Sports/Activity Charges

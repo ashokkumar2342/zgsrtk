@@ -168,8 +168,15 @@
                      </div>
                      <div class="col-lg-3">                         
                        <div class="form-group">
-                        <label for="smart_class_fees" class=" control-label">Smart Class Fees (In Rs.)</label>
+                        <label for="smart_class_fees" class=" control-label">Computer Fees (In Rs.)</label>
                         <input class="form-control required classfee"  value="{{ $student->smart_class_fee }}" name="smart_class_fees" type="number" id="smart_class_fees">
+                        <p class="text-danger"></p>
+                        </div>
+                     </div>
+                     <div class="col-lg-3">                         
+                       <div class="form-group">
+                        <label for="exam_fees" class=" control-label">Exam Fees (In Rs.)</label>
+                        <input class="form-control required classfee"  value="{{ $student->exam_fees }}" name="exam_fees" type="number" id="smart_class_fees">
                         <p class="text-danger"></p>
                         </div>
                      </div>
@@ -269,7 +276,7 @@
         transportSearch($(this).val(),$('input[name="center"]:checked').val());
     });
     if ($("#session").val() > 0) {
-        classSearch($("#session").val(),{{ $student->class_id }}); 
+        classSearch($("#session").val(),{{ $student->center_id }},{{ $student->class_id }}); 
     }
     if (transportId > 0) {
         $("#transport").prop('checked',true);
@@ -277,13 +284,13 @@
         $("#driver").html('');
     }
     routeSearch();
-    function classSearch(value,selectVal=null){
+    function classSearch(value,center_id=null,selectVal=null){
         var selected = null;
         $('#class').html('<option value="">Searching ...</option>');
         $.ajax({
           method: "get",
           url: "{{ route('admin.class.search2') }}",
-          data: { id: value, center_id: value}
+          data: { id: value, center_id: center_id}
         })
         .done(function( response ) {            
             if(response.length>0){

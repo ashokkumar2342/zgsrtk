@@ -229,6 +229,7 @@ class StudentController extends Controller
         
         $studentFee->activity_charge =$request->activity_charges ;
         $studentFee->smart_class_fee =$request->smart_class_fees ;
+        $studentFee->exam_fees =$request->exam_fees ;
         $studentFee->sms_charge =$request->sms_charges;
         $studentFee->tution_fee = $request->tution_fees;
         $studentFee->transport_fee= $request->transport_fee;
@@ -330,7 +331,7 @@ class StudentController extends Controller
         $student->section_id= $request->section;
         $student->totalFee= $request->total_fee-$transport_fee2;
         $student->firsttime_fee = ($request->admission_fees+$request->admission_form_fees+$request->registration_fees+$request->annual_charges) ;
-        $student->installment_fee = ($request->activity_charges+$request->smart_class_fees+$request->sms_charges+$request->tution_fees+$transport_fee+$request->caution_money);
+        $student->installment_fee = ($request->activity_charges+$request->smart_class_fees+$request->exam_fees+$request->sms_charges+$request->tution_fees+$transport_fee+$request->caution_money);
         
         $student->admission_fee =$request->admission_fees ;
         $student->admission_form_fee =$request->admission_form_fees ;
@@ -340,6 +341,7 @@ class StudentController extends Controller
         
         $student->activity_charge =$request->activity_charges ;
         $student->smart_class_fee =$request->smart_class_fees ;
+        $student->exam_fees =$request->exam_fees ;
         $student->sms_charge =$request->sms_charges;
         $student->tution_fee = $request->tution_fees;
         $student->transport_fee= $transport_fee;
@@ -481,7 +483,7 @@ class StudentController extends Controller
         $student->section_id= $request->section;
         $student->totalFee= $request->total_fee-$transport_fee2;
         $student->firsttime_fee = ($request->admission_fees+$request->registration_fees+$request->admission_form_fees+$request->annual_charges) ;
-        $student->installment_fee = ($request->activity_charges+$request->smart_class_fees+$request->sms_charges+$request->tution_fees+$transport_fee+$request->caution_money);
+        $student->installment_fee = ($request->activity_charges+$request->smart_class_fees+$request->exam_fees+$request->sms_charges+$request->tution_fees+$transport_fee+$request->caution_money);
         
         $student->admission_fee =$request->admission_fees ;
         $student->admission_form_fee =$request->admission_form_fees ;
@@ -491,6 +493,7 @@ class StudentController extends Controller
         
         $student->activity_charge =$request->activity_charges ;
         $student->smart_class_fee =$request->smart_class_fees ;
+        $student->exam_fees =$request->exam_fees ;
         $student->sms_charge =$request->sms_charges;
         $student->tution_fee = $request->tution_fees;
         $student->transport_fee= $transport_fee;
@@ -546,7 +549,7 @@ class StudentController extends Controller
         $student->section_id= $request->section;
         $student->totalFee= $request->total_fee-$transport_fee2;
         $student->firsttime_fee = ($request->admission_fees+$request->admission_form_fees+$request->registration_fees+$request->annual_charges) ;
-        $student->installment_fee = ($request->activity_charges+$request->smart_class_fees+$request->sms_charges+$request->tution_fees+$transport_fee+$request->caution_money);
+        $student->installment_fee = ($request->activity_charges+$request->smart_class_fees+$request->exam_fees+$request->sms_charges+$request->tution_fees+$transport_fee+$request->caution_money);
         
         $student->admission_fee =$request->admission_fees ;
         $student->admission_form_fee =$request->admission_form_fees ;
@@ -556,6 +559,7 @@ class StudentController extends Controller
         
         $student->activity_charge =$request->activity_charges ;
         $student->smart_class_fee =$request->smart_class_fees ;
+        $student->exam_fees =$request->exam_fees ;
         $student->sms_charge =$request->sms_charges;
         $student->tution_fee = $request->tution_fees;
         $student->transport_fee= $transport_fee;
@@ -715,9 +719,9 @@ class StudentController extends Controller
           $students =Student::where(['center_id'=>$request->center,'session_id'=>$request->session,'class_id'=>$request->class])->get();
             foreach ($students as  $student) {
                 $data = Student::find($student->id);
-                $data->totalFee= $request->admission_fees+$request->admission_form_fees+$request->registration_fees+$request->annual_charges+$request->caution_money+$request->activity_charges+$request->smart_class_fees+$request->tution_fees+$request->sms_charges+$student->transport_fee;
+                $data->totalFee= $request->admission_fees+$request->admission_form_fees+$request->registration_fees+$request->annual_charges+$request->caution_money+$request->activity_charges+$request->smart_class_fees+$request->exam_fees+$request->tution_fees+$request->sms_charges+$student->transport_fee;
                 $data->firsttime_fee = ($request->admission_fees+$request->registration_fees+$request->admission_form_fees+$request->annual_charges) ;
-                $data->installment_fee = ($request->activity_charges+$request->smart_class_fees+$request->sms_charges+$request->tution_fees+$student->transport_fee+$request->caution_money);
+                $data->installment_fee = ($request->activity_charges+$request->smart_class_fees+$request->exam_fees+$request->sms_charges+$request->tution_fees+$student->transport_fee+$request->caution_money);
 
                 $data->admission_fee=$request->admission_fees;
                 $data->admission_form_fee=$request->admission_form_fees;
@@ -726,6 +730,8 @@ class StudentController extends Controller
                 $data->caution_money=$request->caution_money;
                 $data->activity_charge=$request->activity_charges; 
                 $data->smart_class_fee=$request->smart_class_fees;
+                $data->exam_fees=$request->exam_fees;
+                $data->exam_fees=$request->exam_fees;
                 $data->tution_fee=$request->tution_fees;
                 $data->sms_charge=$request->sms_charges;
                 $data->save(); 

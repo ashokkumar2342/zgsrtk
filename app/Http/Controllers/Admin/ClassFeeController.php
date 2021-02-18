@@ -18,7 +18,7 @@ class ClassFeeController extends Controller
     public function index()
     {
         $centers = Center::where('status',1)->get();
-        $classfees =  ClassFee::where('session_id','>=',3)->get();
+        $classfees =  ClassFee::where('session_id','>=',5)->get();
         $classes = array_pluck(ClassType::get(['id','alias'])->toArray(),'alias', 'id');
         $sessions = array_pluck(SessionDate::get(['id','date'])->toArray(),'date', 'id');
         return view('admin.account.classfee.list',compact('centers','classes','classfees','sessions'));
@@ -34,7 +34,7 @@ class ClassFeeController extends Controller
     public function omax()
     {
          $centers = Center::where('status',1)->get();
-        $classfees =  ClassFee::where('center_id',3)->where('session_id','>=',3)->get();
+        $classfees =  ClassFee::where('center_id',3)->where('session_id','>=',5)->get();
         $classes = array_pluck(ClassType::get(['id','alias'])->toArray(),'alias', 'id');
         $sessions = array_pluck(SessionDate::get(['id','date'])->toArray(),'date', 'id');
         return view('admin.account.classfee.omax',compact('centers','classes','classfees','sessions'));
@@ -62,6 +62,7 @@ class ClassFeeController extends Controller
             'caution_money'=>'required|numeric',
             'activity_charges'=>'required|numeric',
             'smart_class_fees'=>'required|numeric',
+            'exam_fees'=>'required|numeric',
             'tuition_fees'=>'required|numeric',
         ]);
         
@@ -77,6 +78,7 @@ class ClassFeeController extends Controller
         $classfee->caution_fee = $request->caution_money;
         $classfee->activity_charge = $request->activity_charges;
         $classfee->smart_fee = $request->smart_class_fees;
+        $classfee->exam_fees = $request->exam_fees;
         $classfee->tution_fee = $request->tuition_fees;
         $classfee->other_fee = $request->other_charges;
         $classfee->discount = $request->discount;
@@ -108,7 +110,7 @@ class ClassFeeController extends Controller
     public function edit(ClassFee $classFee)
     {
         $centers = Center::where('status',1)->get();
-        $classfees =  ClassFee::all();
+        $classfees =  ClassFee::where('session_id','>=',5)->get();
         $classes = array_pluck(ClassType::get(['id','alias'])->toArray(),'alias', 'id');
         $sessions = array_pluck(SessionDate::get(['id','date'])->toArray(),'date', 'id');
         // return $classFee;
@@ -138,6 +140,7 @@ class ClassFeeController extends Controller
             'caution_money'=>'required|numeric',
             'activity_charges'=>'required|numeric',
             'smart_class_fees'=>'required|numeric',
+            'exam_fees'=>'required|numeric',
             'tuition_fees'=>'required|numeric',
             'other_charges'=>'nullable|numeric',
         ]);
@@ -152,6 +155,7 @@ class ClassFeeController extends Controller
         $classFee->caution_fee = $request->caution_money;
         $classFee->activity_charge = $request->activity_charges;
         $classFee->smart_fee = $request->smart_class_fees;
+        $classFee->exam_fees = $request->exam_fees;
         $classFee->tution_fee = $request->tuition_fees;
         $classFee->other_fee = $request->other_charges;
         $classFee->discount = $request->discount;
