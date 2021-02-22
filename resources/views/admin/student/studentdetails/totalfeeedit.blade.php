@@ -215,7 +215,7 @@
                      <div class="col-lg-3">                         
                        <div class="form-group">
                         <label for="total_fee" class=" control-label">Total Fee (In Rs.)</label>
-                        <input class="form-control required " name="total_fee" value="{{ $student->transport_fee + $student->sms_charge + $student->tution_fee + $student->smart_class_fee + $student->activity_charge + $student->caution_money + $student->annual_charge + $student->registration_fee + $student->admission_fee + $student->admission_form_fee  }}" type="number" id="total_fee">
+                        <input class="form-control required " name="total_fee" value="{{ $student->transport_fee + $student->sms_charge + $student->tution_fee + $student->smart_class_fee+ $student->exam_fees + $student->activity_charge + $student->caution_money + $student->annual_charge + $student->registration_fee + $student->admission_fee + $student->admission_form_fee  }}" type="number" id="total_fee">
                         <p class="text-danger"></p>
                         </div>
                      </div>

@@ -112,7 +112,7 @@ class SectionController extends Controller
                      <div class="col-lg-2">                         
                        <div class="form-group">
                         <label for="tution_fees" class=" control-label">Tuition Fees (In Rs.)</label>
-                        <input class="form-control required classfee"  value="'.($classFee->tution_fee).'" name="tution_fees" type="number" id="tution_fees">
+                        <input class="form-control required classfee"  value="'.($classFee->tution_fee*4).'" name="tution_fees" type="number" id="tution_fees">
                         <p class="text-danger"></p>
                         </div>
                      </div>
@@ -120,8 +120,8 @@ class SectionController extends Controller
                        <div class="form-group">
                         <label for="tution_pay_time" class=" control-label">Type</label>
                          <select name="tution_pay_time" class="form-control">
-                            <option value="1" selected>Yearly</option>
-                            <option value="4">Quarterly</option>
+                            <option value="1">Yearly</option>
+                            <option value="4" selected>Quarterly</option>
                              <option value="12">Monthly</option>
                          </select>
                         <p class="text-danger"></p>
@@ -144,7 +144,7 @@ class SectionController extends Controller
                      <div class="col-lg-3">                         
                        <div class="form-group">
                         <label for="total_fee" class=" control-label">Total Fee (In Rs.)</label>
-                        <input class="form-control required " name="total_fee" value="'.($classFee->admission_fee+$classFee->admission_form_fee + $classFee->registration_fee + $classFee->annual_fee + $classFee->caution_fee + ($classFee->activity_charge*4) + ($classFee->smart_fee*4) + ($classFee->tution_fee*4) + ($classFee->other_fee*4) + ($classFee->bus_fee*4)).'" type="number" id="total_fee">
+                        <input class="form-control required " name="total_fee" value="'.($classFee->admission_fee+$classFee->admission_form_fee + $classFee->registration_fee + $classFee->annual_fee + $classFee->caution_fee + ($classFee->activity_charge*4) + ($classFee->smart_fee*4)+ ($classFee->exam_fees*4) + ($classFee->tution_fee*4) + ($classFee->other_fee*4) + ($classFee->bus_fee*4)).'" type="number" id="total_fee">
                         <p class="text-danger"></p>
                         </div>
                      </div>
